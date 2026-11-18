@@ -92,6 +92,50 @@
   scrollbar-width: none;
 }
 
+/* Accessible Carousel Track (modern-web-guidance: carousel) */
+.carousel-track {
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .carousel-track {
+    scroll-behavior: smooth;
+  }
+}
+
+.carousel-control {
+  touch-action: manipulation;
+}
+
+/* Equalizer bars for active video badge */
+@keyframes eq-bar {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+
+.animate-eq-1 {
+  animation: eq-bar 0.7s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.animate-eq-2 {
+  animation: eq-bar 0.55s ease-in-out 0.15s infinite;
+  transform-origin: bottom;
+}
+.animate-eq-3 {
+  animation: eq-bar 0.8s ease-in-out 0.3s infinite;
+  transform-origin: bottom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-eq-1,
+  .animate-eq-2,
+  .animate-eq-3 {
+    animation: none;
+  }
+}
+
 /* Fluid responsive container - Wide with decreased side padding as requested */
 .fluid-container {
   width: 100%;

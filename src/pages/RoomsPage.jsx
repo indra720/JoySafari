@@ -1,42 +1,56 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Coffee, Wifi, Wind, Bed, Sparkles, Check, ArrowRight, Calendar, 
-  Eye, Trees, Bath, Tv, ShieldCheck 
-} from 'lucide-react';
+import { Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
+import VideoSurface from '../components/VideoSurface';
 
 export default function RoomsPage() {
-  const [activeImage, setActiveImage] = useState({
-    'garden-facing': 0,
-    'lake-view': 0
+  const [activeMedia, setActiveMedia] = useState({
+    'garden-facing': 'video',
+    'lake-view': 'video',
   });
 
-  const handleSelectImage = (roomId, index) => {
-    setActiveImage(prev => ({
+  const handleSelectMedia = (roomId, mode) => {
+    setActiveMedia((prev) => ({
       ...prev,
-      [roomId]: index
+      [roomId]: mode,
     }));
   };
 
   return (
-    <div className="bg-[#FBF5EA] min-h-screen pt-8 pb-24">
-      {/* Page Header */}
-      <div className="fluid-container text-center pt-6 pb-10">
-        <SectionTitle
-          eyebrow="ROYAL RESORT STAY"
-          title="Luxury Cottages & Lakeside"
-          scriptWord="Suites"
-          subtitle="Escape city chaos and unwind in serene tranquility. Each stay includes a lavish morning breakfast and complimentary full-day safari access."
-        />
-      </div>
+    <div className="bg-[#FBF5EA] min-h-screen pb-24">
+      {/* Full-Width Living Resort Room Video Header */}
+      <section className="relative bg-[#2A0408] text-white py-14 sm:py-20 mb-12 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-60">
+          <VideoSurface
+            src={content.rooms[1].videoUrl}
+            poster={content.rooms[1].image}
+            alt="Joy Safari Luxury Rooms"
+            shouldPlay={true}
+            muted={true}
+            videoClassName="scale-105"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#240306]/85 via-[#36060B]/70 to-[#240306]/90 z-[1]" />
 
-      {/* Room Showcases - Wide layout */}
+        <div className="fluid-container relative z-10 text-center">
+          <SectionTitle
+            theme="dark"
+            eyebrow="ROYAL RESORT STAY"
+            title="Luxury Cottages & Lakeside"
+            scriptWord="Suites"
+            subtitle="Escape city chaos and unwind in serene tranquility. Each stay includes a lavish morning breakfast and full-day safari access."
+          />
+        </div>
+      </section>
+
+      {/* Room Showcases */}
       <div className="fluid-container space-y-12 sm:space-y-16 w-full max-w-[1720px] mx-auto">
         {content.rooms.map((room, idx) => {
-          const selectedIdx = activeImage[room.id] || 0;
-          const currentImg = room.gallery[selectedIdx] || room.image;
+          const mode = activeMedia[room.id] ?? 'video';
+          const isVideo = mode === 'video';
+          const currentImg = typeof mode === 'number' ? room.gallery[mode] : room.image;
           const isReversed = idx % 2 === 1;
 
           return (
@@ -44,40 +58,71 @@ export default function RoomsPage() {
               key={room.id}
               className="bg-white rounded-3xl sm:rounded-4xl border-2 border-cream-200 shadow-soft overflow-hidden p-5 sm:p-10"
             >
-              <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center ${
-                isReversed ? 'lg:flex-row-reverse' : ''
-              }`}>
-                {/* Image Gallery Column (7 cols) */}
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center ${
+                  isReversed ? 'lg:flex-row-reverse' : ''
+                }`}
+              >
+                {/* Living Video & Photo Gallery Column (7 cols) */}
                 <div className={`lg:col-span-7 space-y-3.5 ${isReversed ? 'lg:order-2' : ''}`}>
-                  <div className="relative h-64 sm:h-96 rounded-2xl sm:rounded-3xl overflow-hidden bg-cream-200 shadow-md">
-                    <img
-                      src={currentImg}
-                      alt={room.title}
-                      className="w-full h-full object-cover transition-all duration-500"
-                    />
+                  <div className="relative h-72 sm:h-[440px] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1D0407] shadow-md">
+                    {isVideo ? (
+                      <VideoSurface
+                        src={room.videoUrl}
+                        poster={room.image}
+                        alt={room.title}
+                        shouldPlay={true}
+                        muted={true}
+                      />
+                    ) : (
+                      <img
+                        src={currentImg}
+                        alt={room.title}
+                        className="w-full h-full object-cover transition-all duration-500"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15 pointer-events-none" />
+
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-maroon text-white shadow-md">
                         {room.tag}
                       </span>
                     </div>
+
                     <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-2xl shadow-md text-[#2B1511] text-xs font-black flex items-center gap-1.5">
                       <Coffee className="w-4 h-4 text-[#B8901F]" />
                       <span>Complimentary Breakfast</span>
                     </div>
                   </div>
 
-                  {/* Thumbnail Row */}
-                  <div className="flex gap-2 sm:gap-3">
+                  {/* Minimal Thumbnail Row */}
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleSelectMedia(room.id, 'video')}
+                      className={`h-14 sm:h-16 px-4 rounded-xl border-2 font-sans font-bold text-xs inline-flex items-center gap-1.5 transition-all cursor-pointer ${
+                        isVideo
+                          ? 'bg-[#7A0F1B] text-gold-soft border-[#D4AF37] shadow-md'
+                          : 'bg-cream-50 text-[#2B1511] border-cream-200 hover:border-gold'
+                      }`}
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Live View</span>
+                    </button>
+
                     {room.gallery.map((thumb, tIdx) => (
                       <button
                         key={tIdx}
                         type="button"
-                        onClick={() => handleSelectImage(room.id, tIdx)}
+                        onClick={() => handleSelectMedia(room.id, tIdx)}
+                        aria-label={`View ${room.title} photo ${tIdx + 1}`}
                         className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                          selectedIdx === tIdx ? 'border-[#7A0F1B] shadow-md scale-105' : 'border-transparent opacity-70 hover:opacity-100'
+                          mode === tIdx
+                            ? 'border-[#7A0F1B] shadow-md scale-105'
+                            : 'border-transparent opacity-70 hover:opacity-100'
                         }`}
                       >
-                        <img src={thumb} alt="thumbnail" className="w-full h-full object-cover" />
+                        <img src={thumb} alt="room preview" className="w-full h-full object-cover" />
                       </button>
                     ))}
                   </div>

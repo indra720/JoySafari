@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
+import VideoSurface from '../components/VideoSurface';
 
 export default function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -78,16 +79,31 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#FBF5EA] min-h-screen pt-8 pb-24">
-      {/* Page Title */}
-      <div className="fluid-container text-center pt-6 pb-10">
-        <SectionTitle
-          eyebrow="RESERVATIONS & INQUIRIES"
-          title="Book Your Safari or Contact Our"
-          scriptWord="Royal Desk"
-          subtitle="Reserve passes, book overnight cottages, or request corporate/private celebration arrangements."
-        />
-      </div>
+    <div className="bg-[#FBF5EA] min-h-screen pb-24">
+      {/* Cinematic Auto-Running Video Header for Contact & Reservations */}
+      <section className="relative bg-[#2A0408] text-white py-14 sm:py-20 mb-12 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-60">
+          <VideoSurface
+            src={content.contactMedia.heroVideo}
+            poster={content.contactMedia.heroPoster}
+            alt="Joy Safari Jaipur Reservations"
+            shouldPlay={true}
+            muted={true}
+            videoClassName="scale-105"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#240306]/85 via-[#36060B]/70 to-[#240306]/90 z-[1]" />
+
+        <div className="fluid-container relative z-10 text-center">
+          <SectionTitle
+            theme="dark"
+            eyebrow="RESERVATIONS & INQUIRIES"
+            title="Book Your Safari or Contact Our"
+            scriptWord="Royal Desk"
+            subtitle="Reserve passes, book overnight cottages, or request private family celebration arrangements."
+          />
+        </div>
+      </section>
 
       <div className="fluid-container w-full max-w-[1720px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start">
@@ -337,8 +353,33 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* Right Column: Contact Cards & Map (5 cols) */}
+          {/* Right Column: Living Welcome Video, Contact Cards & Map (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
+            {/* Resort Welcome Auto-Running Video Card */}
+            <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-gold/40 shadow-soft bg-[#1D0407]">
+              <VideoSurface
+                src={content.contactMedia.arrivalVideo}
+                poster={content.contactMedia.arrivalPoster}
+                alt="Welcome to Joy Safari Jaipur"
+                shouldPlay={true}
+                muted={true}
+                videoClassName="object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#240306]/90 via-black/25 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 text-white space-y-1">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold text-[#4A0910] text-[10px] font-black uppercase tracking-wider">
+                  <Bus className="w-3 h-3" />
+                  <span>Free AC Pickup Across Jaipur</span>
+                </span>
+                <h3 className="font-serif font-bold text-xl">
+                  Your Royal Escape Awaits
+                </h3>
+                <p className="text-xs text-cream-200">
+                  Daily 3:30 PM to 11:00 PM • Achrol Valley, NH-48
+                </p>
+              </div>
+            </div>
+
             {/* Direct Contact Cards */}
             <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-gold/30 shadow-soft space-y-5">
               <h3 className="font-serif font-black text-xl text-[#2B1511]">

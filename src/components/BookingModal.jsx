@@ -32,16 +32,16 @@ export default function BookingModal({ isOpen, onClose, preselectedPackage = "Da
       return;
     }
 
-    const message = `*Royal Booking Request - Joy Safari Jaipur* 👑%0A%0A` +
-      `👤 *Name:* ${encodeURIComponent(formData.name)}%0A` +
-      `📞 *Phone:* ${encodeURIComponent(formData.phone)}%0A` +
-      `📧 *Email:* ${encodeURIComponent(formData.email || 'N/A')}%0A` +
-      `📅 *Date of Visit:* ${encodeURIComponent(formData.date || 'To be decided')}%0A` +
-      `👥 *Number of Guests:* ${encodeURIComponent(formData.guests)}%0A` +
-      `🎟️ *Package:* ${encodeURIComponent(formData.selectedPackage)}%0A` +
-      `🚌 *Need Pick Up & Drop:* ${encodeURIComponent(formData.needPickup)}%0A` +
-      `💬 *Special Notes:* ${encodeURIComponent(formData.notes || 'None')}%0A%0A` +
-      `*(Note: We confirm we are a Family / Couple ❤️)*`;
+    const message = `*Royal Booking Request - Joy Safari Jaipur*%0A%0A` +
+      `*Name:* ${encodeURIComponent(formData.name)}%0A` +
+      `*Phone:* ${encodeURIComponent(formData.phone)}%0A` +
+      `*Email:* ${encodeURIComponent(formData.email || 'N/A')}%0A` +
+      `*Date of Visit:* ${encodeURIComponent(formData.date || 'To be decided')}%0A` +
+      `*Number of Guests:* ${encodeURIComponent(formData.guests)}%0A` +
+      `*Package:* ${encodeURIComponent(formData.selectedPackage)}%0A` +
+      `*Need Pick Up & Drop:* ${encodeURIComponent(formData.needPickup)}%0A` +
+      `*Special Notes:* ${encodeURIComponent(formData.notes || 'None')}%0A%0A` +
+      `*(Note: We confirm we are a Family / Couple)*`;
 
     window.open(`https://wa.me/918000928080?text=${message}`, '_blank');
     setIsSubmitted(true);
@@ -70,7 +70,7 @@ export default function BookingModal({ isOpen, onClose, preselectedPackage = "Da
               </h3>
               <p className="text-[11px] text-pink-200 flex items-center gap-1">
                 <Heart className="w-3.5 h-3.5 fill-pink-400 text-pink-400" />
-                Only for Family & Couples ❤️
+                Only for Family & Couples
               </p>
             </div>
           </div>

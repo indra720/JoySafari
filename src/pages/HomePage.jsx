@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Bus, Utensils, Flame, HeartHandshake, Ticket, CalendarCheck, BusFront, 
-  Sparkles, Clock, ShieldCheck, ArrowRight, Play, Phone, Calendar, MapPin, 
-  Star, Award, Users, Bed, Coffee, Wind, Eye, Check, Mail, Share2, Heart,
-  Compass, ChevronRight
+import {
+  Bus, Utensils, Flame, HeartHandshake, Ticket, CalendarCheck, BusFront,
+  Sparkles, Clock, ShieldCheck, ArrowRight, Phone, Calendar, MapPin,
+  Star, Award, Users, Coffee, Check, Share2, Heart, Compass, ChevronRight, Trees,
+  Music, Crown
 } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
@@ -12,11 +12,12 @@ import BookingWidget from '../components/BookingWidget';
 import ActivitySlider from '../components/ActivitySlider';
 import CountdownTimer from '../components/CountdownTimer';
 import CollageGallery from '../components/CollageGallery';
+import VideoSurface from '../components/VideoSurface';
+import MobileCarousel from '../components/MobileCarousel';
 
 export default function HomePage() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
 
   const handleNewsletter = (e) => {
     e.preventDefault();
@@ -51,40 +52,46 @@ export default function HomePage() {
   return (
     <div className="bg-[#FBF5EA] min-h-screen">
       {/* =========================================================================
-          SECTION 1: HERO SECTION
+          SECTION 1: PURE AUTO-RUNNING BACKGROUND VIDEO HERO
       ========================================================================= */}
-      <section className="relative bg-[#36060B] text-white pt-6 pb-20 sm:pb-28 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-35 mix-blend-luminosity scale-105"
-          style={{ backgroundImage: `url(${content.hero.bgImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#2A0408] via-[#36060B]/90 to-[#4A0910]/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/15 via-transparent to-transparent pointer-events-none" />
+      <section className="relative bg-[#2A0408] text-white pt-6 pb-20 sm:pb-28 overflow-hidden">
+        {/* Seamless Auto-Running Background Video */}
+        <div className="absolute inset-0 z-0">
+          <VideoSurface
+            src={content.hero.bgVideo}
+            poster={content.hero.bgImage}
+            alt="Joy Safari Jaipur Resort"
+            shouldPlay={true}
+            muted={true}
+            videoClassName="scale-105 opacity-95"
+          />
+        </div>
+
+        {/* Balanced Royal Vignette so real Hero Video shines through clearly */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#240306]/75 via-[#36060B]/50 to-[#4A0910]/35 pointer-events-none z-[1]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/20 via-transparent to-transparent pointer-events-none z-[1]" />
 
         <div className="fluid-container relative z-10 pt-2 sm:pt-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             {/* Left Column: Hero Text & Badges (7 cols) */}
             <div className="lg:col-span-7 space-y-5 text-left">
-              {/* Badges Row */}
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gold text-[#4A0910] shadow-gold-sm border border-gold-bright">
                   <Sparkles className="w-3.5 h-3.5 text-[#4A0910]" />
                   <span>{content.hero.ribbonBadge}</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 backdrop-blur-md text-cream-100 border border-gold/30">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-black/45 backdrop-blur-md text-cream-100 border border-gold/30">
                   <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
                   <span>{content.hero.familyBadge}</span>
                 </span>
               </div>
 
-              {/* Script Eyebrow */}
-              <p className="font-script text-2xl sm:text-3xl text-gold-soft tracking-wider font-bold">
+              <p className="font-script text-2xl sm:text-3xl text-gold-soft tracking-wider font-bold drop-shadow">
                 {content.hero.scriptLine}
               </p>
 
-              {/* Big Headlines */}
               <div className="space-y-2">
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black leading-[1.15] text-white">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black leading-[1.15] text-white drop-shadow-md">
                   {content.hero.titlePrefix}{' '}
                   <span className="text-gold-gradient block sm:inline">
                     {content.hero.titleHighlight}
@@ -94,18 +101,17 @@ export default function HomePage() {
                   <span className="text-xs sm:text-base font-black tracking-widest text-gold-soft uppercase block">
                     {content.hero.brandTitle}
                   </span>
-                  <span className="text-xs sm:text-sm text-cream-200 font-sans tracking-wide">
+                  <span className="text-xs sm:text-sm text-cream-100 font-sans tracking-wide">
                     {content.hero.subtitle}
                   </span>
                 </div>
               </div>
 
-              {/* Paragraph */}
-              <p className="text-xs sm:text-base text-[#FFF8E7] leading-relaxed max-w-xl font-normal">
+              <p className="text-xs sm:text-base text-[#FFF8E7] leading-relaxed max-w-xl font-normal drop-shadow-sm">
                 {content.hero.paragraph}
               </p>
 
-              {/* Action Buttons & Video Play */}
+              {/* Clean Action Buttons */}
               <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
                 <Link
                   to="/contact"
@@ -118,30 +124,21 @@ export default function HomePage() {
 
                 <a
                   href={`tel:${content.brand.phone}`}
-                  className="px-4 sm:px-6 py-3 sm:py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-sans font-bold text-xs sm:text-sm border border-gold/40 backdrop-blur-sm transition-all flex items-center gap-2"
+                  className="px-4 sm:px-6 py-3 sm:py-3.5 rounded-full bg-black/40 hover:bg-black/60 text-white font-sans font-bold text-xs sm:text-sm border border-gold/40 backdrop-blur-md transition-all flex items-center gap-2"
                 >
                   <Phone className="w-4 h-4 text-gold-soft" />
                   <span>{content.hero.ctaSecondary}</span>
                 </a>
-
-                <button
-                  onClick={() => setVideoModalOpen(true)}
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-gold-soft hover:text-white transition-colors cursor-pointer py-2 px-2.5"
-                >
-                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gold/20 border border-gold flex items-center justify-center text-gold">
-                    <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-gold translate-x-0.5" />
-                  </span>
-                  <span>{content.hero.watchVideoText}</span>
-                </button>
               </div>
 
               {/* Trust Row */}
-              <div className="pt-4 flex items-center gap-3 sm:gap-4 border-t border-cream-100/10">
+              <div className="pt-4 flex items-center gap-3 sm:gap-4 border-t border-cream-100/15">
                 <div className="flex -space-x-2">
-                  {['https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
+                  {[
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
                     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
                     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80'
+                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
                   ].map((src, i) => (
                     <img
                       key={i}
@@ -160,7 +157,7 @@ export default function HomePage() {
                     </div>
                     <span>{content.hero.trust.rating}</span>
                   </div>
-                  <span className="text-cream-200 text-[10px] sm:text-[11px] font-medium">
+                  <span className="text-cream-100 text-[10px] sm:text-[11px] font-medium">
                     {content.hero.trust.avatarCount} {content.hero.trust.guestsLabel} • {content.hero.trust.reviewsCount}
                   </span>
                 </div>
@@ -187,87 +184,62 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 2: FEATURES STRIP
+          SECTION 2: VIDEO-BACKED ROYAL HIGHLIGHTS STRIP
       ========================================================================= */}
-      <section className="py-8 bg-[#FBF5EA] border-b border-cream-200">
+      <section className="py-6 sm:py-8 bg-[#FBF5EA] border-b border-cream-200">
         <div className="fluid-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
+          <MobileCarousel
+            desktopGridClass="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5"
+            cardWidthClass="w-[82vw] sm:w-[320px] md:w-auto"
+          >
             {content.featuresStrip.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-4 sm:p-5 border-2 border-cream-200 shadow-sm flex items-center gap-4 hover:shadow-md hover:border-gold/50 transition-all"
+                className="relative rounded-2xl overflow-hidden p-4 sm:p-5 border-2 border-gold/35 shadow-md flex items-center gap-4 hover:shadow-xl hover:border-gold transition-all group bg-[#2A0408] h-full"
               >
-                <div className="w-14 h-14 rounded-2xl bg-cream-100 flex items-center justify-center flex-shrink-0 border border-cream-200">
-                  {getFeatureIcon(item.icon)}
+                <div className="absolute inset-0 z-0 opacity-45 group-hover:opacity-60 transition-opacity">
+                  <VideoSurface
+                    src={item.videoUrl}
+                    poster={item.image}
+                    alt={item.title}
+                    shouldPlay={true}
+                    muted={true}
+                  />
                 </div>
-                <div>
-                  <h4 className="font-serif font-black text-sm sm:text-base text-[#2B1511]">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#240306]/90 via-[#36060B]/75 to-[#4A0910]/65 z-[1]" />
+
+                <div className="relative z-10 w-14 h-14 rounded-2xl bg-gold/20 border border-gold/50 backdrop-blur-md flex items-center justify-center flex-shrink-0 text-gold">
+                  {item.icon === 'Bus' && <Bus className="w-6 h-6 text-gold-soft" />}
+                  {item.icon === 'Utensils' && <Utensils className="w-6 h-6 text-gold-soft" />}
+                  {item.icon === 'Flame' && <Flame className="w-6 h-6 text-gold-soft" />}
+                  {item.icon === 'HeartHandshake' && <HeartHandshake className="w-6 h-6 text-gold-soft" />}
+                </div>
+                <div className="relative z-10">
+                  <h4 className="font-serif font-black text-sm sm:text-base text-white">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-[#5C4A42] font-medium leading-snug mt-0.5">
+                  <p className="text-xs text-[#FFF8E7]/85 font-medium leading-snug mt-0.5">
                     {item.desc}
                   </p>
                 </div>
               </div>
             ))}
-          </div>
+          </MobileCarousel>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 3: PLAN YOUR VISIT (Clean Icon Layout - Fixed Squished Bar)
+          SECTION 3 (NEXT SLIDE): LUXURY VIDEO ACTIVITY SHOWCASE WITH SWAPPING POINTS
       ========================================================================= */}
-      <section className="py-16 sm:py-20 bg-[#FBF5EA]">
+      <section className="py-14 sm:py-20 bg-cream-100/70 border-b border-cream-200 overflow-hidden">
         <div className="fluid-container">
-          <SectionTitle
-            eyebrow={content.planSteps.eyebrow}
-            title={content.planSteps.title}
-            scriptWord={content.planSteps.scriptWord}
-            subtitle="Booking your royal escape at Joy Safari Jaipur takes less than 2 minutes. Follow these simple steps for a seamless experience."
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 relative">
-            {content.planSteps.steps.map((st) => (
-              <div
-                key={st.step}
-                className="bg-white rounded-3xl p-6 border-2 border-cream-200 shadow-soft hover:shadow-soft-hover hover:border-gold/50 transition-all duration-300 relative group flex flex-col justify-between"
-              >
-                <div>
-                  {/* Clean top row: Rounded square icon on left + step number on right */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-14 h-14 rounded-2xl bg-[#4A0910] text-gold flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform border border-gold/40">
-                      {getPlanIcon(st.icon)}
-                    </div>
-                    <span className="font-serif font-black text-2xl text-cream-300 group-hover:text-gold transition-colors">
-                      {st.step}
-                    </span>
-                  </div>
-
-                  <h3 className="font-serif font-bold text-lg text-[#2B1511] group-hover:text-maroon transition-colors mb-2">
-                    {st.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#5C4A42] leading-relaxed font-medium">
-                    {st.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 4: TOP ATTRACTIONS SLIDER (12 activities)
-      ========================================================================= */}
-      <section className="py-16 sm:py-20 bg-cream-100/60 border-y border-cream-200 overflow-hidden">
-        <div className="fluid-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6">
             <SectionTitle
               align="left"
               eyebrow="TOP ATTRACTIONS"
               title="Experience 12+ World-Class"
               scriptWord="Adventures"
-              subtitle="From flying high across the lake to laughing on the toy train, every activity is designed for family joy and safety."
+              subtitle="From flying high across the shimmering lake to laughing on the toy train, every attraction is crafted for pure family joy and safety."
             />
             <div className="hidden md:block mb-10">
               <Link
@@ -285,18 +257,24 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 5: FEATURED BANNERS
+          SECTION 4: FEATURED VIDEO EXPERIENCE BANNERS
       ========================================================================= */}
       <section className="py-16 sm:py-20 bg-[#FBF5EA]">
         <div className="fluid-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             {/* Banner 1: Big Card (7 cols) */}
-            <div className="lg:col-span-7 relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold/40 min-h-[380px] flex flex-col justify-end p-6 sm:p-10 group">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url(${content.featuredBanners.banner1.image})` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#36060B] via-[#4A0910]/70 to-black/30" />
+            <div className="lg:col-span-7 relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold/50 min-h-[440px] sm:min-h-[480px] flex flex-col justify-end p-6 sm:p-10 group bg-[#2A0408]">
+              <div className="absolute inset-0 z-0">
+                <VideoSurface
+                  src={content.featuredBanners.banner1.videoUrl}
+                  poster={content.featuredBanners.banner1.image}
+                  alt={content.featuredBanners.banner1.title}
+                  shouldPlay={true}
+                  muted={true}
+                  videoClassName="transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2A0408] via-[#4A0910]/60 to-black/20 z-[1]" />
 
               <div className="relative z-10 space-y-3">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gold text-[#4A0910] shadow-sm">
@@ -329,12 +307,18 @@ export default function HomePage() {
             </div>
 
             {/* Banner 2: Stay by Lake Card (5 cols) */}
-            <div className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border-2 border-cream-200 min-h-[380px] flex flex-col justify-end p-6 sm:p-10 group">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url(${content.featuredBanners.banner2.image})` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-black/30" />
+            <div className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border-2 border-cream-200 min-h-[440px] sm:min-h-[480px] flex flex-col justify-end p-6 sm:p-10 group bg-[#1D0407]">
+              <div className="absolute inset-0 z-0">
+                <VideoSurface
+                  src={content.featuredBanners.banner2.videoUrl}
+                  poster={content.featuredBanners.banner2.image}
+                  alt={content.featuredBanners.banner2.title}
+                  shouldPlay={true}
+                  muted={true}
+                  videoClassName="transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-black/20 z-[1]" />
 
               <div className="relative z-10 space-y-3">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-sage text-white shadow-sm">
@@ -370,14 +354,77 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 6: LIVE STAGE / MELA NIGHT
+          SECTION 5: PLAN YOUR VISIT (4 VIDEO STEP CARDS)
       ========================================================================= */}
-      <section className="py-20 sm:py-24 bg-[#36060B] text-white relative overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity"
-          style={{ backgroundImage: `url(${content.liveStage.bgImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2A0408] via-[#36060B]/95 to-[#2A0408]" />
+      <section className="py-16 sm:py-20 bg-cream-100/60 border-y border-cream-200">
+        <div className="fluid-container">
+          <SectionTitle
+            eyebrow={content.planSteps.eyebrow}
+            title={content.planSteps.title}
+            scriptWord={content.planSteps.scriptWord}
+            subtitle="Booking your royal escape at Joy Safari Jaipur takes less than 2 minutes. Follow these simple steps for a seamless experience."
+          />
+
+          <MobileCarousel
+            desktopGridClass="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6"
+            cardWidthClass="w-[82vw] sm:w-[320px] md:w-auto"
+          >
+            {content.planSteps.steps.map((st) => (
+              <div
+                key={st.step}
+                className="bg-white rounded-3xl overflow-hidden border-2 border-cream-200 shadow-soft hover:shadow-soft-hover hover:border-gold/50 transition-all duration-300 relative group flex flex-col justify-between h-full"
+              >
+                <div>
+                  {/* Live Step Video Strip */}
+                  <div className="relative h-56 sm:h-64 bg-[#1D0407] overflow-hidden">
+                    <VideoSurface
+                      src={st.videoUrl}
+                      poster={st.image}
+                      alt={st.title}
+                      shouldPlay={true}
+                      muted={true}
+                      videoClassName="object-top transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+                      <div className="w-11 h-11 rounded-2xl bg-[#4A0910]/95 text-gold flex items-center justify-center shrink-0 shadow-md border border-gold/50 backdrop-blur-sm">
+                        {getPlanIcon(st.icon)}
+                      </div>
+                      <span className="font-serif font-black text-2xl text-gold-soft drop-shadow">
+                        {st.step}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 sm:p-6">
+                    <h3 className="font-serif font-bold text-lg text-[#2B1511] group-hover:text-maroon transition-colors mb-2">
+                      {st.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#5C4A42] leading-relaxed font-medium">
+                      {st.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </MobileCarousel>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 6: LIVE STAGE / MELA NIGHT (PURE AUTO-RUNNING VIDEO SHOWCASE)
+      ========================================================================= */}
+      <section className="py-20 sm:py-24 bg-[#2A0408] text-white relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-40">
+          <VideoSurface
+            src={content.liveStage.bgVideo}
+            poster={content.liveStage.bgImage}
+            alt="Rajasthani Mela Night Live Stage"
+            shouldPlay={true}
+            muted={true}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#240306]/90 via-[#36060B]/80 to-[#240306]/95 z-[1]" />
 
         <div className="fluid-container relative z-10">
           <SectionTitle
@@ -388,23 +435,78 @@ export default function HomePage() {
             subtitle={content.liveStage.description}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
-            {content.liveStage.highlights.map((hl, i) => (
-              <div
-                key={i}
-                className="bg-black/50 border border-gold/40 rounded-2xl p-5 backdrop-blur-md hover:border-gold hover:bg-black/70 transition-all"
-              >
-                <div className="w-8 h-8 rounded-full bg-gold/20 text-gold flex items-center justify-center font-serif font-bold text-sm mb-3 border border-gold/30">
-                  0{i + 1}
-                </div>
-                <h4 className="font-serif font-bold text-base text-gold-soft mb-1">
-                  {hl.title}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12 sm:mb-16 items-stretch">
+            {/* Pure Living Stage Video Frame (5 cols) */}
+            <div className="lg:col-span-5 relative rounded-3xl overflow-hidden border-2 border-gold/50 shadow-2xl min-h-[380px] sm:min-h-[440px] group">
+              <VideoSurface
+                src={content.liveStage.reelVideo}
+                poster={content.liveStage.bgImage}
+                alt="Rajasthani Live Stage Celebration"
+                shouldPlay={true}
+                muted={true}
+                videoClassName="object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
+
+              <div className="absolute bottom-5 left-5 right-5 z-10">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold text-[#4A0910] text-[11px] font-black uppercase tracking-wider mb-2">
+                  <Sparkles className="w-3 h-3" />
+                  <span>7:30 PM - 9:00 PM Daily</span>
+                </span>
+                <h4 className="font-serif font-bold text-xl text-white">
+                  Folk Dance, Dhol & Fire Show
                 </h4>
-                <p className="text-xs text-[#FFF8E7] leading-relaxed">
-                  {hl.desc}
-                </p>
               </div>
-            ))}
+            </div>
+
+            {/* 4 Cultural Highlights Grid (7 cols) - Premium Royal Card UI */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              {content.liveStage.highlights.map((hl, i) => {
+                const stageMeta = [
+                  { icon: <Sparkles className="w-5 h-5 text-gold" />, pill: 'Open-Air Amphitheater' },
+                  { icon: <Music className="w-5 h-5 text-gold" />, pill: 'Live Manganiyar Artists' },
+                  { icon: <Flame className="w-5 h-5 text-gold" />, pill: 'Evening Stunt Showcase' },
+                  { icon: <Crown className="w-5 h-5 text-gold" />, pill: 'Kids & Family Favorite' },
+                ][i] || { icon: <Sparkles className="w-5 h-5 text-gold" />, pill: 'Royal Evening Show' };
+
+                return (
+                  <div
+                    key={i}
+                    className="relative overflow-hidden bg-gradient-to-br from-[#4A0910]/90 via-[#2D050A]/90 to-[#1B0306]/95 border border-gold/40 rounded-3xl p-6 backdrop-blur-md hover:border-gold hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between shadow-lg group"
+                  >
+                    <div className="absolute -top-10 -right-10 w-28 h-28 bg-gold/10 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors pointer-events-none" />
+
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-12 h-12 rounded-2xl bg-gold/15 border border-gold/45 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+                          {stageMeta.icon}
+                        </div>
+                        <span className="font-serif font-black text-3xl text-gold/30 group-hover:text-gold/60 transition-colors leading-none">
+                          0{i + 1}
+                        </span>
+                      </div>
+
+                      <h4 className="font-serif font-black text-lg sm:text-xl text-gold-soft mb-2 group-hover:text-white transition-colors">
+                        {hl.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-[#FFF8E7]/90 leading-relaxed font-normal">
+                        {hl.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 pt-3.5 border-t border-gold/25 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-gold-soft tracking-wide">
+                        <Check className="w-3.5 h-3.5 text-gold" />
+                        <span>{stageMeta.pill}</span>
+                      </span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-cream-200/75">
+                        Included
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="bg-black/60 border border-gold/40 rounded-3xl p-6 sm:p-10 backdrop-blur-md">
@@ -435,10 +537,21 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 7: OFFER BANNER WITH COUNTDOWN
+          SECTION 7: VIDEO-BACKED OFFER BANNER WITH COUNTDOWN
       ========================================================================= */}
-      <section className="py-12 bg-gradient-to-r from-[#4A0910] via-[#5C0A14] to-[#4A0910] text-white border-y border-gold/40 relative">
-        <div className="fluid-container">
+      <section className="py-12 bg-[#36060B] text-white border-y border-gold/40 relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-35">
+          <VideoSurface
+            src={content.countdownOffer.bgVideo}
+            poster={content.hero.bgImage}
+            alt="Inaugural Offer"
+            shouldPlay={true}
+            muted={true}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4A0910]/90 via-[#5C0A14]/80 to-[#4A0910]/90 z-[1]" />
+
+        <div className="fluid-container relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-4 text-center lg:text-left">
               <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gold text-[#4A0910] shadow-sm">
@@ -461,7 +574,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bg-black/40 border-2 border-gold/40 rounded-3xl p-6 sm:p-7 max-w-md w-full backdrop-blur-sm space-y-4">
+            <div className="bg-black/50 border-2 border-gold/40 rounded-3xl p-6 sm:p-7 max-w-md w-full backdrop-blur-md space-y-4">
               <h4 className="font-serif font-bold text-sm uppercase tracking-wider text-gold-soft border-b border-gold/20 pb-2">
                 All-Inclusive Highlights:
               </h4>
@@ -489,7 +602,7 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 8: PRICING SECTION
+          SECTION 8: PRICING SECTION (WITH AMBIENT VIDEO PASS CARD)
       ========================================================================= */}
       <section className="py-16 sm:py-24 bg-[#FBF5EA]">
         <div className="fluid-container">
@@ -500,45 +613,57 @@ export default function HomePage() {
             subtitle="Transparent pricing with no hidden charges. Everything is included in your single ticket pass."
           />
 
-          <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            {/* Left: Ornate Maroon Badge */}
-            <div className="md:col-span-5 bg-gradient-to-br from-maroon via-maroon-dark to-maroon-deep rounded-3xl p-8 sm:p-10 text-white text-center border-2 border-gold shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-2xl pointer-events-none" />
-              
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-gold/20 text-gold-soft border border-gold/40 mb-4">
-                Grand All-Inclusive Pass
-              </span>
-
-              <div className="font-serif font-black text-xs uppercase tracking-widest text-cream-200 mb-1">
-                PRICE ONLY
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+            {/* Left: Video-Backed Ornate Maroon Pass */}
+            <div className="lg:col-span-5 bg-[#36060B] rounded-3xl p-8 sm:p-10 lg:p-12 text-white text-center border-2 border-gold shadow-2xl relative overflow-hidden flex flex-col justify-center">
+              <div className="absolute inset-0 z-0 opacity-35">
+                <VideoSurface
+                  src={content.pricingSection.bgVideo}
+                  poster={content.hero.bgImage}
+                  alt="All Inclusive Pass"
+                  shouldPlay={true}
+                  muted={true}
+                />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-b from-[#4A0910]/85 via-[#36060B]/80 to-[#240306]/95 z-[1]" />
 
-              <div className="font-serif font-black text-5xl sm:text-6xl text-gold-gradient tracking-tight my-2">
-                ₹{content.pricingSection.badgePrice}
+              <div className="relative z-10">
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-gold/20 text-gold-soft border border-gold/40 mb-4">
+                  Grand All-Inclusive Pass
+                </span>
+
+                <div className="font-serif font-black text-xs uppercase tracking-widest text-cream-200 mb-1">
+                  PRICE ONLY
+                </div>
+
+                <div className="font-serif font-black text-5xl sm:text-6xl text-gold-gradient tracking-tight my-2">
+                  ₹{content.pricingSection.badgePrice}
+                </div>
+
+                <div className="text-xs uppercase tracking-widest font-black text-gold-soft mb-6">
+                  {content.pricingSection.badgeGst} per person
+                </div>
+
+                <p className="text-xs text-[#FFF8E7] leading-relaxed mb-6 font-light">
+                  Covers transport, full 12+ activity passes, boat ride, pool, evening tea, cultural stage show & gala buffet.
+                </p>
+
+                <Link
+                  to="/contact?package=day-safari"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-2xl bg-gold text-[#4A0910] font-sans font-black text-xs sm:text-sm shadow-lg hover:shadow-gold-glow transition-all"
+                >
+                  <span>Book Day Safari</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
-
-              <div className="text-xs uppercase tracking-widest font-black text-gold-soft mb-6">
-                {content.pricingSection.badgeGst} per person
-              </div>
-
-              <p className="text-xs text-[#FFF8E7] leading-relaxed mb-6 font-light">
-                Covers transport, full 12+ activity passes, boat ride, pool, evening tea, cultural stage show & gala buffet.
-              </p>
-
-              <Link
-                to="/contact?package=day-safari"
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-2xl bg-gold text-[#4A0910] font-sans font-black text-xs sm:text-sm shadow-lg hover:shadow-gold-glow transition-all"
-              >
-                <span>Book Day Safari</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
             </div>
 
             {/* Right: Cream Family Card */}
-            <div className="md:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border-2 border-cream-200 shadow-soft">
+            <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-10 border-2 border-cream-200 shadow-soft flex flex-col justify-between">
               <div className="border-b border-cream-200 pb-4 mb-6">
-                <span className="text-xs font-black px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 inline-block mb-2">
-                  {content.pricingSection.familyCard.title}
+                <span className="text-xs font-black px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1.5 mb-2">
+                  <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
+                  <span>{content.pricingSection.familyCard.title}</span>
                 </span>
                 <p className="text-xs text-[#5C4A42] leading-relaxed font-medium">
                   {content.pricingSection.familyCard.subtitle}
@@ -568,8 +693,9 @@ export default function HomePage() {
 
               <div className="mt-6 pt-4 border-t border-cream-200 flex items-center justify-between text-xs text-[#5C4A42] font-medium">
                 <span>Free entry for kids below 3 years</span>
-                <Link to="/packages" className="text-[#7A0F1B] font-bold hover:text-[#B8901F] transition-colors">
-                  View Full Packages →
+                <Link to="/packages" className="text-[#7A0F1B] font-bold hover:text-[#B8901F] transition-colors inline-flex items-center gap-1">
+                  <span>View Full Packages</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -578,7 +704,7 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 9: PARK INFO STRIP
+          SECTION 9: PARK INFO & ARRIVAL VIDEO STRIP
       ========================================================================= */}
       <section className="py-16 sm:py-20 bg-cream-100 border-y border-cream-200">
         <div className="fluid-container">
@@ -589,7 +715,7 @@ export default function HomePage() {
             subtitle="Conveniently situated right off NH-48 in Achrol Valley with complimentary pickup shuttles."
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             <div className="lg:col-span-7 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-white rounded-2xl p-5 border-2 border-cream-200 shadow-sm">
@@ -627,24 +753,46 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-white rounded-3xl p-3 border-2 border-gold/30 shadow-soft overflow-hidden h-[320px]">
-              <iframe
-                title="Joy Safari Location Map"
-                src={content.parkInfo.mapEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: '1rem' }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              {/* Scenic Route Living Video Card */}
+              <div className="relative h-64 sm:h-72 rounded-3xl overflow-hidden border-2 border-gold/40 shadow-soft bg-[#1D0407]">
+                <VideoSurface
+                  src={content.parkInfo.videoUrl}
+                  poster={content.parkInfo.poster}
+                  alt="Scenic Drive to Achrol Valley"
+                  shouldPlay={true}
+                  muted={true}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                <div className="absolute bottom-3.5 left-4 right-4 text-white">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-gold-soft block">
+                    Achrol Valley • NH-48
+                  </span>
+                  <h4 className="font-serif font-bold text-base">
+                    30 Mins Scenic Escape from Pink City
+                  </h4>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-3xl p-2.5 border-2 border-gold/30 shadow-soft overflow-hidden flex-1 min-h-[210px]">
+                <iframe
+                  title="Joy Safari Location Map"
+                  src={content.parkInfo.mapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: '1rem', minHeight: '190px' }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 10: ROOM STAY WITH BREAKFAST
+          SECTION 10: ROOM STAY WITH PURE AUTO-RUNNING VIDEO PREVIEWS
       ========================================================================= */}
       <section className="py-16 sm:py-24 bg-[#FBF5EA]">
         <div className="fluid-container">
@@ -655,25 +803,30 @@ export default function HomePage() {
             subtitle="Extend your royal experience into the night. Wake up to fresh lakeside breeze and birdsong in Achrol Valley."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full">
             {content.rooms.map((room) => (
               <div
                 key={room.id}
                 className="bg-white rounded-3xl overflow-hidden border-2 border-cream-200 shadow-soft hover:shadow-soft-hover transition-all duration-300 group flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-60 sm:h-72 overflow-hidden bg-cream-200">
-                    <img
-                      src={room.image}
+                  <div className="relative h-72 sm:h-80 overflow-hidden bg-[#1D0407]">
+                    <VideoSurface
+                      src={room.videoUrl}
+                      poster={room.image}
                       alt={room.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      shouldPlay={true}
+                      muted={true}
+                      videoClassName="transition-transform duration-700 group-hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-maroon text-white shadow-md">
                         {room.tag}
                       </span>
                     </div>
+
                     <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-2xl shadow-md text-[#2B1511] text-xs font-black flex items-center gap-1.5">
                       <Coffee className="w-4 h-4 text-[#B8901F]" />
                       <span>Breakfast Included</span>
@@ -725,7 +878,7 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 11: WHY CHOOSE US
+          SECTION 11: WHY CHOOSE US (VIDEO-HEADER CARDS)
       ========================================================================= */}
       <section className="py-16 sm:py-20 bg-cream-100 border-y border-cream-200">
         <div className="fluid-container">
@@ -736,70 +889,99 @@ export default function HomePage() {
             subtitle="We are committed to delivering unmatched safety, genuine royal hospitality, and lasting memories."
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <MobileCarousel
+            desktopGridClass="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8"
+            cardWidthClass="w-[82vw] sm:w-[320px] md:w-auto"
+          >
             {content.whyChooseUs.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-3xl p-7 border-2 border-cream-200 shadow-soft hover:shadow-soft-hover transition-all duration-300 flex flex-col items-center text-center group"
+                className="bg-white rounded-3xl overflow-hidden border-2 border-cream-200 hover:border-gold/50 shadow-soft hover:shadow-soft-hover transition-all duration-300 flex flex-col text-center group h-full"
               >
-                <div className="w-16 h-16 rounded-full bg-cream-100 text-[#7A0F1B] border-2 border-cream-200 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-[#7A0F1B] group-hover:text-gold transition-all duration-300">
-                  {item.icon === 'ShieldCheck' && <ShieldCheck className="w-7 h-7" />}
-                  {item.icon === 'Bus' && <Bus className="w-7 h-7" />}
-                  {item.icon === 'Sparkles' && <Sparkles className="w-7 h-7" />}
-                  {item.icon === 'UtensilsCrossed' && <Utensils className="w-7 h-7" />}
-                  {item.icon === 'Trees' && <Sparkles className="w-7 h-7" />}
-                  {item.icon === 'Award' && <Award className="w-7 h-7" />}
+                <div className="relative h-56 sm:h-64 bg-[#1D0407] overflow-hidden">
+                  <VideoSurface
+                    src={item.videoUrl}
+                    poster={item.image}
+                    alt={item.title}
+                    shouldPlay={true}
+                    muted={true}
+                    videoClassName="transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2A0408]/80 via-black/20 to-transparent" />
                 </div>
 
-                <h3 className="font-serif font-black text-lg text-[#2B1511] mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#5C4A42] leading-relaxed font-medium">
-                  {item.desc}
-                </p>
+                <div className="px-6 pb-7 -mt-8 relative z-10 flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full bg-[#7A0F1B] text-gold border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {item.icon === 'ShieldCheck' && <ShieldCheck className="w-7 h-7" />}
+                    {item.icon === 'Bus' && <Bus className="w-7 h-7" />}
+                    {item.icon === 'Sparkles' && <Sparkles className="w-7 h-7" />}
+                    {item.icon === 'UtensilsCrossed' && <Utensils className="w-7 h-7" />}
+                    {item.icon === 'Trees' && <Trees className="w-7 h-7" />}
+                    {item.icon === 'Award' && <Award className="w-7 h-7" />}
+                  </div>
+
+                  <h3 className="font-serif font-black text-lg text-[#2B1511] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C4A42] leading-relaxed font-medium">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
             ))}
-          </div>
+          </MobileCarousel>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 12: TRUST & STATS
+          SECTION 12: VIDEO-BACKED TRUST & STATS
       ========================================================================= */}
-      <section className="py-16 sm:py-24 bg-[#FBF5EA]">
-        <div className="fluid-container">
+      <section className="py-16 sm:py-24 bg-[#2A0408] text-white relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-45">
+          <VideoSurface
+            src={content.trustStats.bgVideo}
+            poster={content.trustStats.poster}
+            alt="Happy Families at Joy Safari"
+            shouldPlay={true}
+            muted={true}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#240306]/90 via-[#36060B]/80 to-[#240306]/90 z-[1]" />
+
+        <div className="fluid-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-4 space-y-4 text-left">
-              <span className="text-xs font-black uppercase tracking-wider text-[#7A0F1B] px-3 py-1 rounded-full bg-maroon/10 border border-maroon/20 inline-block">
+              <span className="text-xs font-black uppercase tracking-wider text-[#4A0910] px-3 py-1 rounded-full bg-gold inline-block shadow-sm">
                 {content.trustStats.eyebrow}
               </span>
-              <h3 className="font-serif font-black text-3xl sm:text-4xl text-[#2B1511] leading-tight">
+              <h3 className="font-serif font-black text-3xl sm:text-4xl text-white leading-tight">
                 {content.trustStats.title}{' '}
-                <span className="font-script text-4xl sm:text-5xl text-gold-deep italic block">
+                <span className="font-script text-4xl sm:text-5xl text-gold-soft italic block">
                   {content.trustStats.scriptWord}
                 </span>
               </h3>
-              <p className="text-xs sm:text-sm text-[#5C4A42] leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-[#FFF8E7]/90 leading-relaxed font-normal">
                 Over 5,000+ happy families and couples have experienced our royal safari adventure. Here is what they have to say.
               </p>
 
               <div className="pt-2 flex items-center gap-3">
                 <div className="flex -space-x-3">
-                  {['https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
+                  {[
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
                     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80'
+                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
                   ].map((src, i) => (
-                    <img key={i} src={src} alt="guest" className="w-10 h-10 rounded-full border-2 border-white object-cover" />
+                    <img key={i} src={src} alt="guest" className="w-10 h-10 rounded-full border-2 border-gold object-cover" />
                   ))}
                 </div>
                 <div className="text-xs">
-                  <div className="font-bold text-[#2B1511]">5,000+ Happy Guests</div>
-                  <div className="text-[#5C4A42] text-[11px] font-medium">Jaipur & Delhi Visitors</div>
+                  <div className="font-bold text-white">5,000+ Happy Guests</div>
+                  <div className="text-gold-soft text-[11px] font-medium">Jaipur & Delhi Visitors</div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-4 bg-white rounded-3xl p-7 border-2 border-cream-200 shadow-soft relative">
+            <div className="lg:col-span-4 bg-white/95 backdrop-blur-md rounded-3xl p-7 border-2 border-gold/40 shadow-2xl relative text-[#2B1511]">
               <div className="flex text-gold mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-gold" />
@@ -829,12 +1011,12 @@ export default function HomePage() {
               {content.trustStats.counters.map((cnt, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-2xl p-5 border-2 border-cream-200 shadow-sm text-center"
+                  className="bg-black/45 backdrop-blur-md rounded-2xl p-5 border border-gold/40 shadow-lg text-center"
                 >
-                  <div className="font-serif font-black text-3xl sm:text-4xl text-[#7A0F1B] mb-1">
+                  <div className="font-serif font-black text-3xl sm:text-4xl text-gold-gradient mb-1">
                     {cnt.value}
                   </div>
-                  <div className="text-xs font-bold text-[#5C4A42]">
+                  <div className="text-xs font-bold text-[#FFF8E7]">
                     {cnt.label}
                   </div>
                 </div>
@@ -845,15 +1027,15 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 13: GALLERY COLLAGE
+          SECTION 13: LIVING MOTION SCRAPBOOK COLLAGE
       ========================================================================= */}
       <section className="py-16 sm:py-20 bg-cream-100/70 border-y border-cream-200">
         <div className="fluid-container">
           <SectionTitle
             eyebrow="MOMENTS CAPTURED"
-            title="Snapshots from Our Royal"
+            title="Memories from Our Royal"
             scriptWord="Safari Scrapbook"
-            subtitle="Real candid smiles, water splashes, starry night dinners, and high-flying thrills."
+            subtitle="Candid family smiles, water splashes, starry night dinners, and high-flying thrills at Joy Safari Jaipur."
           />
 
           <CollageGallery />
@@ -861,7 +1043,7 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 14: BLOG / STORIES
+          SECTION 14: TRAVEL GUIDES & STORIES (AUTO-RUNNING VIDEO CARDS)
       ========================================================================= */}
       <section className="py-16 sm:py-24 bg-[#FBF5EA]">
         <div className="fluid-container">
@@ -872,19 +1054,24 @@ export default function HomePage() {
             subtitle="Helpful tips, itineraries, and stories to make your Joy Safari visit unforgettable."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <MobileCarousel
+            desktopGridClass="md:grid md:grid-cols-3 md:gap-8"
+            cardWidthClass="w-[82vw] sm:w-[320px] md:w-auto"
+          >
             {content.blogs.map((b) => (
               <div
                 key={b.id}
-                className="bg-white rounded-3xl overflow-hidden border-2 border-cream-200 shadow-soft hover:shadow-soft-hover transition-all duration-300 group flex flex-col justify-between"
+                className="bg-white rounded-3xl overflow-hidden border-2 border-cream-200 shadow-soft hover:shadow-soft-hover transition-all duration-300 group flex flex-col justify-between h-full"
               >
                 <div>
-                  <div className="relative h-52 overflow-hidden bg-cream-200">
-                    <img
-                      src={b.image}
+                  <div className="relative h-64 sm:h-72 overflow-hidden bg-[#1D0407]">
+                    <VideoSurface
+                      src={b.videoUrl}
+                      poster={b.image}
                       alt={b.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      shouldPlay={true}
+                      muted={true}
+                      videoClassName="transition-transform duration-500 group-hover:scale-105"
                     />
                     <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/95 text-maroon backdrop-blur-sm shadow-sm">
                       {b.category}
@@ -917,15 +1104,24 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
+          </MobileCarousel>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 15: NEWSLETTER / FINAL CTA STRIP
+          SECTION 15: VIDEO-BACKED NEWSLETTER / FINAL CTA STRIP
       ========================================================================= */}
-      <section className="py-20 bg-gradient-to-br from-[#7A0F1B] via-[#4A0910] to-[#36060B] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gold/20 via-transparent to-transparent pointer-events-none" />
+      <section className="py-20 bg-[#36060B] text-white relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-25">
+          <VideoSurface
+            src={content.hero.bgVideo}
+            poster={content.hero.bgImage}
+            alt="Joy Safari Jaipur"
+            shouldPlay={true}
+            muted={true}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#7A0F1B]/90 via-[#4A0910]/90 to-[#36060B]/95 z-[1]" />
 
         <div className="fluid-container relative z-10 space-y-16">
           <div className="max-w-2xl mx-auto text-center space-y-4">
@@ -1005,31 +1201,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Video Modal */}
-      {videoModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="relative w-full max-w-3xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-gold/40">
-            <button
-              onClick={() => setVideoModalOpen(false)}
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all cursor-pointer"
-            >
-              ✕
-            </button>
-            <div className="aspect-video w-full">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="Resort Experience Preview"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
