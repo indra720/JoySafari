@@ -1,59 +1,92 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  Bus, Utensils, Flame, HeartHandshake, Ticket, CalendarCheck, BusFront,
-  Clock, ShieldCheck, ArrowRight, Phone, Calendar, MapPin,
-  Star, Award, Users, Coffee, Check, Share2, Heart, Compass, ChevronRight, Trees,
-  Music, Crown
-} from 'lucide-react';
-import { content } from '../data/content';
-import SectionTitle from '../components/SectionTitle';
-import BookingWidget from '../components/BookingWidget';
-import ActivitySlider from '../components/ActivitySlider';
-import CountdownTimer from '../components/CountdownTimer';
-import CollageGallery from '../components/CollageGallery';
-import VideoSurface from '../components/VideoSurface';
-import MobileCarousel from '../components/MobileCarousel';
+  Bus,
+  Utensils,
+  Flame,
+  HeartHandshake,
+  Ticket,
+  CalendarCheck,
+  BusFront,
+  Clock,
+  ShieldCheck,
+  ArrowRight,
+  Phone,
+  Calendar,
+  MapPin,
+  Star,
+  Award,
+  Users,
+  Coffee,
+  Check,
+  Share2,
+  Heart,
+  Compass,
+  ChevronRight,
+  Trees,
+  Music,
+  Crown,
+} from "lucide-react";
+import { content } from "../data/content";
+import SectionTitle from "../components/SectionTitle";
+import BookingWidget from "../components/BookingWidget";
+import ActivitySlider from "../components/ActivitySlider";
+import CountdownTimer from "../components/CountdownTimer";
+import CollageGallery from "../components/CollageGallery";
+import VideoSurface from "../components/VideoSurface";
+import MobileCarousel from "../components/MobileCarousel";
 
 export default function HomePage() {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterError, setNewsletterError] = useState('');
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterError, setNewsletterError] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   const handleNewsletter = (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(newsletterEmail.trim())) {
-      setNewsletterError('Please enter a valid email address.');
+      setNewsletterError("Please enter a valid email address.");
       return;
     }
-    setNewsletterError('');
+    setNewsletterError("");
     setSubscribed(true);
     setTimeout(() => {
-      setNewsletterEmail('');
+      setNewsletterEmail("");
       setSubscribed(false);
     }, 3500);
   };
 
   const getFeatureIcon = (iconName) => {
     switch (iconName) {
-      case 'Bus': return <Bus className="w-6 h-6 text-[#7A0F1B]" />;
-      case 'Utensils': return <Utensils className="w-6 h-6 text-[#7A0F1B]" />;
-      case 'Flame': return <Flame className="w-6 h-6 text-[#7A0F1B]" />;
-      case 'HeartHandshake': return <HeartHandshake className="w-6 h-6 text-[#7A0F1B]" />;
-      case 'Crown': return <Crown className="w-6 h-6 text-[#7A0F1B]" />;
-      default: return <Crown className="w-6 h-6 text-[#7A0F1B]" />;
+      case "Bus":
+        return <Bus className="w-6 h-6 text-[#7A0F1B]" />;
+      case "Utensils":
+        return <Utensils className="w-6 h-6 text-[#7A0F1B]" />;
+      case "Flame":
+        return <Flame className="w-6 h-6 text-[#7A0F1B]" />;
+      case "HeartHandshake":
+        return <HeartHandshake className="w-6 h-6 text-[#7A0F1B]" />;
+      case "Crown":
+        return <Crown className="w-6 h-6 text-[#7A0F1B]" />;
+      default:
+        return <Crown className="w-6 h-6 text-[#7A0F1B]" />;
     }
   };
 
   const getPlanIcon = (iconName) => {
     switch (iconName) {
-      case 'Ticket': return <Ticket className="w-6 h-6 text-gold" />;
-      case 'CalendarCheck': return <CalendarCheck className="w-6 h-6 text-gold" />;
-      case 'BusFront': return <BusFront className="w-6 h-6 text-gold" />;
-      case 'Crown': return <Crown className="w-6 h-6 text-gold" />;
-      case 'Flame': return <Flame className="w-6 h-6 text-gold" />;
-      default: return <Compass className="w-6 h-6 text-gold" />;
+      case "Ticket":
+        return <Ticket className="w-6 h-6 text-gold" />;
+      case "CalendarCheck":
+        return <CalendarCheck className="w-6 h-6 text-gold" />;
+      case "BusFront":
+        return <BusFront className="w-6 h-6 text-gold" />;
+      case "Crown":
+        return <Crown className="w-6 h-6 text-gold" />;
+      case "Flame":
+        return <Flame className="w-6 h-6 text-gold" />;
+      default:
+        return <Compass className="w-6 h-6 text-gold" />;
     }
   };
 
@@ -100,7 +133,7 @@ export default function HomePage() {
 
               <div className="space-y-2">
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black leading-[1.15] text-white drop-shadow-md">
-                  {content.hero.titlePrefix}{' '}
+                  {content.hero.titlePrefix}{" "}
                   <span className="text-gold-gradient block sm:inline">
                     {content.hero.titleHighlight}
                   </span>
@@ -143,10 +176,10 @@ export default function HomePage() {
               <div className="pt-4 flex items-center gap-3 sm:gap-4 border-t border-cream-100/15">
                 <div className="flex -space-x-2">
                   {[
-                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+                    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
                   ].map((src, i) => (
                     <img
                       key={i}
@@ -160,13 +193,18 @@ export default function HomePage() {
                   <div className="flex items-center gap-1 font-bold text-gold-soft">
                     <div className="flex text-gold">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold" />
+                        <Star
+                          key={i}
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold"
+                        />
                       ))}
                     </div>
                     <span>{content.hero.trust.rating}</span>
                   </div>
                   <span className="text-cream-100 text-[10px] sm:text-[11px] font-medium">
-                    {content.hero.trust.avatarCount} {content.hero.trust.guestsLabel} • {content.hero.trust.reviewsCount}
+                    {content.hero.trust.avatarCount}{" "}
+                    {content.hero.trust.guestsLabel} •{" "}
+                    {content.hero.trust.reviewsCount}
                   </span>
                 </div>
               </div>
@@ -217,10 +255,18 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#240306]/90 via-[#36060B]/75 to-[#4A0910]/65 z-[1]" />
 
                 <div className="relative z-10 w-14 h-14 rounded-2xl bg-gold/20 border border-gold/50 backdrop-blur-md flex items-center justify-center flex-shrink-0 text-gold">
-                  {item.icon === 'Bus' && <Bus className="w-6 h-6 text-gold-soft" />}
-                  {item.icon === 'Utensils' && <Utensils className="w-6 h-6 text-gold-soft" />}
-                  {item.icon === 'Flame' && <Flame className="w-6 h-6 text-gold-soft" />}
-                  {item.icon === 'HeartHandshake' && <HeartHandshake className="w-6 h-6 text-gold-soft" />}
+                  {item.icon === "Bus" && (
+                    <Bus className="w-6 h-6 text-gold-soft" />
+                  )}
+                  {item.icon === "Utensils" && (
+                    <Utensils className="w-6 h-6 text-gold-soft" />
+                  )}
+                  {item.icon === "Flame" && (
+                    <Flame className="w-6 h-6 text-gold-soft" />
+                  )}
+                  {item.icon === "HeartHandshake" && (
+                    <HeartHandshake className="w-6 h-6 text-gold-soft" />
+                  )}
                 </div>
                 <div className="relative z-10">
                   <h4 className="font-serif font-black text-sm sm:text-base text-white">
@@ -260,7 +306,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          <ActivitySlider activities={content.activities.filter(a => a.included !== false)} />
+          <ActivitySlider
+            activities={content.activities.filter((a) => a.included !== false)}
+          />
         </div>
       </section>
 
@@ -471,11 +519,26 @@ export default function HomePage() {
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               {content.liveStage.highlights.map((hl, i) => {
                 const stageMeta = [
-                  { icon: <Compass className="w-5 h-5 text-gold" />, pill: 'Open-Air Amphitheater' },
-                  { icon: <Music className="w-5 h-5 text-gold" />, pill: 'Live Manganiyar Artists' },
-                  { icon: <Flame className="w-5 h-5 text-gold" />, pill: 'Evening Stunt Showcase' },
-                  { icon: <Crown className="w-5 h-5 text-gold" />, pill: 'Kids & Family Favorite' },
-                ][i] || { icon: <Crown className="w-5 h-5 text-gold" />, pill: 'Royal Evening Show' };
+                  {
+                    icon: <Compass className="w-5 h-5 text-gold" />,
+                    pill: "Open-Air Amphitheater",
+                  },
+                  {
+                    icon: <Music className="w-5 h-5 text-gold" />,
+                    pill: "Live Manganiyar Artists",
+                  },
+                  {
+                    icon: <Flame className="w-5 h-5 text-gold" />,
+                    pill: "Evening Stunt Showcase",
+                  },
+                  {
+                    icon: <Crown className="w-5 h-5 text-gold" />,
+                    pill: "Kids & Family Favorite",
+                  },
+                ][i] || {
+                  icon: <Crown className="w-5 h-5 text-gold" />,
+                  pill: "Royal Evening Show",
+                };
 
                 return (
                   <div
@@ -527,7 +590,10 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 relative">
               {content.liveStage.timeline.map((item, idx) => (
-                <div key={idx} className="relative group p-3 rounded-2xl bg-white/5 border border-gold/20 hover:border-gold/60 transition-colors">
+                <div
+                  key={idx}
+                  className="relative group p-3 rounded-2xl bg-white/5 border border-gold/20 hover:border-gold/60 transition-colors"
+                >
                   <div className="inline-block px-2.5 py-1 rounded-full text-[11px] font-serif font-bold bg-gold/20 text-gold border border-gold/40 mb-2">
                     {item.time}
                   </div>
@@ -542,8 +608,13 @@ export default function HomePage() {
             </div>
 
             <div className="mt-6 pt-4 border-t border-gold/25 flex items-center justify-between flex-wrap gap-2 text-xs text-gold-soft/90 font-medium">
-              <span>*Note: ATV Ride, Zipline, and Paintball are not included in the ₹1999 package.</span>
-              <span className="text-cream-200/75">Achrol Valley, Jaipur • Daily Schedule</span>
+              <span>
+                *Note: ATV Ride, Zipline, and Paintball are not included in the
+                ₹1999 package.
+              </span>
+              <span className="text-cream-200/75">
+                Achrol Valley, Jaipur • Daily Schedule
+              </span>
             </div>
           </div>
         </div>
@@ -572,7 +643,7 @@ export default function HomePage() {
               </span>
               <div>
                 <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
-                  {content.countdownOffer.title}{' '}
+                  {content.countdownOffer.title}{" "}
                   <span className="text-gold-gradient font-black">
                     {content.countdownOffer.price}
                   </span>
@@ -583,7 +654,9 @@ export default function HomePage() {
               </div>
 
               <div className="pt-2 flex justify-center lg:justify-start">
-                <CountdownTimer initialDays={content.countdownOffer.targetDays} />
+                <CountdownTimer
+                  initialDays={content.countdownOffer.targetDays}
+                />
               </div>
             </div>
 
@@ -658,7 +731,9 @@ export default function HomePage() {
                 </div>
 
                 <p className="text-xs text-[#FFF8E7] leading-relaxed mb-6 font-light">
-                  Covers AC transport, 20+ fun activities, lake boating, pool, traditional welcome with starters, live folk fire show & royal dinner buffet.
+                  Covers AC transport, 20+ fun activities, lake boating, pool,
+                  traditional welcome with starters, live folk fire show & royal
+                  dinner buffet.
                 </p>
 
                 <Link
@@ -685,36 +760,57 @@ export default function HomePage() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {content.pricingSection.familyCard.inclusions.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3.5 rounded-2xl bg-cream-50 border-2 border-cream-200">
-                      <div className="w-10 h-10 rounded-xl bg-[#7A0F1B] text-gold flex items-center justify-center flex-shrink-0 shadow-sm">
-                        {item.icon === 'Bus' && <Bus className="w-5 h-5 text-gold" />}
-                        {item.icon === 'Utensils' && <Utensils className="w-5 h-5 text-gold" />}
-                        {item.icon === 'Flame' && <Flame className="w-5 h-5 text-gold" />}
-                        {item.icon === 'Crown' && <Crown className="w-5 h-5 text-gold" />}
-                        {item.icon === 'Users' && <Users className="w-5 h-5 text-gold" />}
+                  {content.pricingSection.familyCard.inclusions.map(
+                    (item, i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-3 p-3.5 rounded-2xl bg-cream-50 border-2 border-cream-200"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-[#7A0F1B] text-gold flex items-center justify-center flex-shrink-0 shadow-sm">
+                          {item.icon === "Bus" && (
+                            <Bus className="w-5 h-5 text-gold" />
+                          )}
+                          {item.icon === "Utensils" && (
+                            <Utensils className="w-5 h-5 text-gold" />
+                          )}
+                          {item.icon === "Flame" && (
+                            <Flame className="w-5 h-5 text-gold" />
+                          )}
+                          {item.icon === "Crown" && (
+                            <Crown className="w-5 h-5 text-gold" />
+                          )}
+                          {item.icon === "Users" && (
+                            <Users className="w-5 h-5 text-gold" />
+                          )}
+                        </div>
+                        <div>
+                          <h4 className="font-serif font-black text-sm text-[#2B1511]">
+                            {item.label}
+                          </h4>
+                          <p className="text-xs text-[#5C4A42] leading-tight mt-0.5 font-medium">
+                            {item.desc}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-serif font-black text-sm text-[#2B1511]">
-                          {item.label}
-                        </h4>
-                        <p className="text-xs text-[#5C4A42] leading-tight mt-0.5 font-medium">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
                 </div>
 
                 <div className="mt-4 px-3.5 py-2.5 rounded-2xl bg-amber-50/90 border border-amber-300/80 text-xs text-[#7A0F1B] font-semibold flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#7A0F1B] shrink-0" />
-                  <span>Note: ATV Ride, Zipline, and Paintball are not included in the package.</span>
+                  <span>
+                    Note: ATV Ride, Zipline, and Paintball are not included in
+                    the package.
+                  </span>
                 </div>
               </div>
 
               <div className="mt-6 pt-4 border-t border-cream-200 flex items-center justify-between text-xs text-[#5C4A42] font-medium">
                 <span>Free entry for kids below 3 years</span>
-                <Link to="/packages" className="text-[#7A0F1B] font-bold hover:text-[#B8901F] transition-colors inline-flex items-center gap-1">
+                <Link
+                  to="/packages"
+                  className="text-[#7A0F1B] font-bold hover:text-[#B8901F] transition-colors inline-flex items-center gap-1"
+                >
                   <span>View Full Packages</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -744,8 +840,12 @@ export default function HomePage() {
                     <Clock className="w-5 h-5 text-gold" />
                     <span>Park Timings</span>
                   </div>
-                  <p className="text-sm font-bold text-[#2B1511]">{content.parkInfo.timings}</p>
-                  <p className="text-xs text-[#5C4A42] mt-1 font-medium">Adventure activities run 4:00 PM - 7:00 PM</p>
+                  <p className="text-sm font-bold text-[#2B1511]">
+                    {content.parkInfo.timings}
+                  </p>
+                  <p className="text-xs text-[#5C4A42] mt-1 font-medium">
+                    Adventure activities run 4:00 PM - 7:00 PM
+                  </p>
                 </div>
 
                 <div className="bg-white rounded-2xl p-5 border-2 border-cream-200 shadow-sm">
@@ -753,8 +853,12 @@ export default function HomePage() {
                     <MapPin className="w-5 h-5 text-gold" />
                     <span>Location</span>
                   </div>
-                  <p className="text-xs font-bold text-[#2B1511]">{content.parkInfo.location}</p>
-                  <p className="text-xs text-[#5C4A42] mt-1 font-medium">30 mins drive from Jaipur city</p>
+                  <p className="text-xs font-bold text-[#2B1511]">
+                    {content.parkInfo.location}
+                  </p>
+                  <p className="text-xs text-[#5C4A42] mt-1 font-medium">
+                    30 mins drive from Jaipur city
+                  </p>
                 </div>
               </div>
 
@@ -765,7 +869,10 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#2B1511] font-bold">
                   {content.parkInfo.hubs.map((hub, i) => (
-                    <div key={i} className="flex items-center gap-2 p-2.5 rounded-xl bg-cream-50 border border-cream-200">
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-cream-50 border border-cream-200"
+                    >
                       <span className="w-2 h-2 rounded-full bg-gold flex-shrink-0" />
                       <span>{hub}</span>
                     </div>
@@ -801,7 +908,11 @@ export default function HomePage() {
                   src={content.parkInfo.mapEmbedUrl}
                   width="100%"
                   height="100%"
-                  style={{ border: 0, borderRadius: '1rem', minHeight: '190px' }}
+                  style={{
+                    border: 0,
+                    borderRadius: "1rem",
+                    minHeight: "190px",
+                  }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -864,7 +975,10 @@ export default function HomePage() {
 
                     <div className="mt-5 space-y-2 border-t border-cream-200 pt-4">
                       {room.amenities.slice(0, 4).map((am, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-[#2B1511] font-medium">
+                        <div
+                          key={i}
+                          className="flex items-center gap-2 text-xs text-[#2B1511] font-medium"
+                        >
                           <Check className="w-3.5 h-3.5 text-sage flex-shrink-0" />
                           <span>{am}</span>
                         </div>
@@ -875,12 +989,16 @@ export default function HomePage() {
 
                 <div className="p-6 sm:p-7 pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-cream-200 mt-2">
                   <div>
-                    <span className="text-[11px] text-[#5C4A42] block uppercase tracking-wider font-bold">Starting from</span>
+                    <span className="text-[11px] text-[#5C4A42] block uppercase tracking-wider font-bold">
+                      Starting from
+                    </span>
                     <div className="flex items-baseline gap-1">
                       <span className="font-serif font-black text-2xl sm:text-3xl text-[#7A0F1B]">
                         ₹{room.price}
                       </span>
-                      <span className="text-xs text-[#5C4A42] font-semibold">/ night</span>
+                      <span className="text-xs text-[#5C4A42] font-semibold">
+                        / night
+                      </span>
                     </div>
                   </div>
 
@@ -933,13 +1051,17 @@ export default function HomePage() {
 
                 <div className="px-6 pb-7 -mt-8 relative z-10 flex flex-col items-center">
                   <div className="w-16 h-16 rounded-full bg-[#7A0F1B] text-gold border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {item.icon === 'ShieldCheck' && <ShieldCheck className="w-7 h-7" />}
-                    {item.icon === 'Bus' && <Bus className="w-7 h-7" />}
-                    {item.icon === 'Ticket' && <Ticket className="w-7 h-7" />}
-                    {item.icon === 'Crown' && <Crown className="w-7 h-7" />}
-                    {item.icon === 'UtensilsCrossed' && <Utensils className="w-7 h-7" />}
-                    {item.icon === 'Trees' && <Trees className="w-7 h-7" />}
-                    {item.icon === 'Award' && <Award className="w-7 h-7" />}
+                    {item.icon === "ShieldCheck" && (
+                      <ShieldCheck className="w-7 h-7" />
+                    )}
+                    {item.icon === "Bus" && <Bus className="w-7 h-7" />}
+                    {item.icon === "Ticket" && <Ticket className="w-7 h-7" />}
+                    {item.icon === "Crown" && <Crown className="w-7 h-7" />}
+                    {item.icon === "UtensilsCrossed" && (
+                      <Utensils className="w-7 h-7" />
+                    )}
+                    {item.icon === "Trees" && <Trees className="w-7 h-7" />}
+                    {item.icon === "Award" && <Award className="w-7 h-7" />}
                   </div>
 
                   <h3 className="font-serif font-black text-lg text-[#2B1511] mb-2">
@@ -977,28 +1099,38 @@ export default function HomePage() {
                 {content.trustStats.eyebrow}
               </span>
               <h3 className="font-serif font-black text-3xl sm:text-4xl text-white leading-tight">
-                {content.trustStats.title}{' '}
+                {content.trustStats.title}{" "}
                 <span className="font-script text-4xl sm:text-5xl text-gold-soft italic block">
                   {content.trustStats.scriptWord}
                 </span>
               </h3>
               <p className="text-xs sm:text-sm text-[#FFF8E7]/90 leading-relaxed font-normal">
-                Over 5,000+ happy families and couples have experienced our royal safari adventure. Here is what they have to say.
+                Over 5,000+ happy families and couples have experienced our
+                royal safari adventure. Here is what they have to say.
               </p>
 
               <div className="pt-2 flex items-center gap-3">
                 <div className="flex -space-x-3">
                   {[
-                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
                   ].map((src, i) => (
-                    <img key={i} src={src} alt="guest" className="w-10 h-10 rounded-full border-2 border-gold object-cover" />
+                    <img
+                      key={i}
+                      src={src}
+                      alt="guest"
+                      className="w-10 h-10 rounded-full border-2 border-gold object-cover"
+                    />
                   ))}
                 </div>
                 <div className="text-xs">
-                  <div className="font-bold text-white">5,000+ Happy Guests</div>
-                  <div className="text-gold-soft text-[11px] font-medium">Jaipur & Delhi Visitors</div>
+                  <div className="font-bold text-white">
+                    5,000+ Happy Guests
+                  </div>
+                  <div className="text-gold-soft text-[11px] font-medium">
+                    Jaipur & Delhi Visitors
+                  </div>
                 </div>
               </div>
             </div>
@@ -1077,7 +1209,7 @@ export default function HomePage() {
           />
 
           <MobileCarousel
-            desktopGridClass="md:grid md:grid-cols-3 md:gap-8"
+            desktopGridClass="grid gric-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8"
             cardWidthClass="w-[82vw] sm:w-[320px] md:w-auto"
           >
             {content.blogs.map((b) => (
@@ -1151,7 +1283,7 @@ export default function HomePage() {
               {content.newsletter.eyebrow}
             </span>
             <h3 className="font-serif font-bold text-3xl sm:text-4xl text-white">
-              {content.newsletter.title}{' '}
+              {content.newsletter.title}{" "}
               <span className="font-script text-4xl sm:text-5xl text-gold-soft italic">
                 {content.newsletter.scriptWord}
               </span>
@@ -1160,13 +1292,16 @@ export default function HomePage() {
               {content.newsletter.subtitle}
             </p>
 
-            <form onSubmit={handleNewsletter} className="pt-2 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form
+              onSubmit={handleNewsletter}
+              className="pt-2 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
               <input
                 type="email"
                 value={newsletterEmail}
                 onChange={(e) => {
                   setNewsletterEmail(e.target.value);
-                  if (newsletterError) setNewsletterError('');
+                  if (newsletterError) setNewsletterError("");
                 }}
                 placeholder={content.newsletter.placeholder}
                 required
@@ -1176,7 +1311,7 @@ export default function HomePage() {
                 type="submit"
                 className="py-3.5 px-6 rounded-full bg-gold text-[#4A0910] font-sans font-black text-xs sm:text-sm hover:bg-gold-soft transition-all shadow-md cursor-pointer whitespace-nowrap"
               >
-                {subscribed ? 'Subscribed!' : content.newsletter.buttonText}
+                {subscribed ? "Subscribed!" : content.newsletter.buttonText}
               </button>
             </form>
             {newsletterError && (
