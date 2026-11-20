@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { Camera, ArrowRight } from 'lucide-react';
 import { content } from '../data/content';
 import VideoSurface from './VideoSurface';
 import MobileCarousel from './MobileCarousel';
@@ -57,7 +57,7 @@ export default function CollageGallery({ items = content.collageGallery }) {
           to="/gallery"
           className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white border-2 border-gold/40 text-[#7A0F1B] font-serif font-bold text-sm sm:text-base hover:bg-[#7A0F1B] hover:text-white shadow-md hover:shadow-lg transition-all duration-300 group"
         >
-          <Sparkles className="w-4 h-4 text-gold group-hover:text-white transition-colors" />
+          <Camera className="w-4 h-4 text-gold group-hover:text-white transition-colors" />
           <span>Explore Full Gallery</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>

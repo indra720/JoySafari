@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Globe, Share2, Heart, Sparkles, Bus, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Globe, Share2, Heart, Crown, Bus, ArrowRight } from 'lucide-react';
 import { content } from '../data/content';
 
 export default function Footer() {
@@ -36,12 +36,12 @@ export default function Footer() {
             </div>
 
             <p className="text-xs sm:text-sm text-[#FFF8E7] leading-relaxed max-w-md font-normal">
-              Jaipur's first-ever premier family & couple resort destination. Experience the thrill of 12+ adventures, over-water zip lining, serene lake boating, authentic folk stage celebrations, and royal gala dining.
+              Jaipur's first-ever premier family & couple resort destination. Experience the thrill of 20+ adventures, serene lake boating, authentic folk stage celebrations, and royal dinner buffet.
             </p>
 
             <div className="flex flex-wrap gap-2 pt-1">
               <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#4A0910] text-[#F5D26B] border border-gold/40 flex items-center gap-1.5 shadow-sm">
-                <Sparkles className="w-3 h-3 text-gold" />
+                <Crown className="w-3 h-3 text-gold" />
                 <span>{content.brand.badge}</span>
               </span>
               <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#4A0910] text-rose-200 border border-rose-400/40 flex items-center gap-1.5 shadow-sm">
@@ -102,7 +102,7 @@ export default function Footer() {
               <li>
                 <Link to="/activities" className="hover:text-[#F5D26B] transition-colors flex items-center gap-1.5 font-medium py-0.5">
                   <span className="text-gold font-bold">›</span>
-                  <span>12+ Adventures</span>
+                  <span>20+ Activities</span>
                 </Link>
               </li>
               <li>
@@ -183,7 +183,7 @@ export default function Footer() {
             <span>•</span>
             <span>Family & Couples Resort</span>
             <span>•</span>
-            <span>12+ Activities</span>
+            <span>20+ Activities</span>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
+import { Crown } from 'lucide-react';
 
 export default function SectionHeader({ 
   badge, 
@@ -13,7 +13,7 @@ export default function SectionHeader({
       <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
         {badge && (
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-maroon-deep/80 border border-gold/40 text-gold-light text-xs font-semibold mb-3 shadow-gold-sm">
-            <Sparkles className="w-3 h-3 text-gold" />
+            <Crown className="w-3 h-3 text-gold" />
             <span>{badge}</span>
           </div>
         )}
@@ -35,7 +35,7 @@ export default function SectionHeader({
       <div className="max-w-xl">
         {badge && (
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-maroon-deep/80 border border-gold/40 text-gold-light text-[11px] font-semibold mb-3">
-            <Sparkles className="w-3 h-3 text-gold" />
+            <Crown className="w-3 h-3 text-gold" />
             <span>{badge}</span>
           </div>
         )}

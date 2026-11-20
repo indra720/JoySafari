@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Phone, Calendar, Heart, Bus, Sparkles } from 'lucide-react';
+import { Menu, X, Phone, Calendar, Heart, Bus, Crown } from 'lucide-react';
 import { content } from '../data/content';
 
 export default function Navbar() {
@@ -22,7 +22,7 @@ export default function Navbar() {
         <div className="fluid-container flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-4 overflow-hidden whitespace-nowrap">
             <span className="inline-flex items-center gap-1 font-bold text-gold-soft">
-              <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
+              <Crown className="w-3.5 h-3.5 text-gold" />
               <span>{content.brand.badge}</span>
             </span>
             <span className="hidden md:inline text-gold/40">•</span>

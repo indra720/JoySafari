@@ -237,29 +237,39 @@ export const RESORT_DATA = {
   // Suggested Day Safari Itinerary
   itinerary: [
     {
-      time: "02:30 PM - 03:30 PM",
-      title: "Pick Up & Royal Welcome",
-      desc: "AC transport pickup from central Jaipur stops. Arrive to dholak beats, traditional tilak, and refreshing welcome drinks."
+      time: "03:00 PM",
+      title: "Pickup from Designated Location",
+      desc: "Pickup from designated location across Jaipur in comfortable AC tourist coaches."
     },
     {
-      time: "03:30 PM - 06:30 PM",
-      title: "All 12 Adventure & Water Activities",
-      desc: "Full access to over-water Zipline, Boating, Swimming Pool, Bungee Jumping, Rock Climbing, Toy Train & Horse Riding."
+      time: "04:30 PM - 05:00 PM",
+      title: "Arrival at the Resort",
+      desc: "Reach the resort and get ready for the grand royal welcome experience."
     },
     {
-      time: "06:30 PM - 07:30 PM",
-      title: "Sunset High Tea by the Lake",
-      desc: "Watch the golden sunset over the Aravali hills while sipping authentic Kulhad Chai with hot Rajasthani snacks."
+      time: "05:00 PM",
+      title: "Traditional Rajasthani Welcome",
+      desc: "Experience a warm and grand welcome in authentic Rajasthani style, featuring traditional Rajasthani girls, cultural hospitality, welcome drinks, and starters."
     },
     {
-      time: "07:30 PM - 09:00 PM",
-      title: "Grand Rajasthani Live Cultural Show",
-      desc: "Mesmerizing folk dance (Ghoomar & Kalbelia), fire stunts, live vocalists, and vibrant royal entertainment."
+      time: "05:30 PM",
+      title: "Adventure & Activities Time",
+      desc: "Enjoy approximately 20 fun-filled activities (Horse Riding, Camel Riding, Bullock Cart Ride, Boating, Gun Shooting, Toy Train Ride, Kids' Adventure Activities, Sumo Wrestling, and ~12 more games). Note: ATV Ride, Zipline, and Paintball are not included in the package."
     },
     {
-      time: "09:00 PM - 10:30 PM",
-      title: "Royal Gala Dinner Buffet",
-      desc: "Lavish multi-cuisine & Rajasthani royal dinner buffet. Conclude with dessert and comfortable return drop."
+      time: "07:00 PM - 09:30 PM",
+      title: "Cultural Evening & Live Entertainment",
+      desc: "Enjoy an entertaining evening featuring traditional Rajasthani cultural performances, live music and dance, and an exciting fire show."
+    },
+    {
+      time: "09:30 PM - 10:30 PM",
+      title: "Dinner",
+      desc: "Enjoy a delicious dinner featuring a combination of traditional Rajasthani cuisine and regular dinner options."
+    },
+    {
+      time: "10:30 PM - 12:00 AM",
+      title: "Departure & Drop-Off",
+      desc: "Departure from the resort and drop-off at your respective locations, concluding the Joy Safari experience."
     }
   ],
 
@@ -270,7 +280,7 @@ export const RESORT_DATA = {
     },
     {
       title: "Free Pick Up & Drop",
-      desc: "No driving fatigue or cab surge prices. Enjoy comfortable shared pickup & drop from prime Jaipur points."
+      desc: "No driving fatigue or cab surge prices. Enjoy comfortable shared pickup & drop from designated Jaipur points."
     },
     {
       title: "1st Time in Jaipur Concept",
@@ -281,8 +291,8 @@ export const RESORT_DATA = {
       desc: "Unlimited gourmet food crafted by royal recipe keepers — savor authentic taste and hygienic freshness."
     },
     {
-      title: "12+ All-Inclusive Activities",
-      desc: "No hidden charges per game. One pass unlocks zip line, boating, pool, train, climbing, and all shows."
+      title: "20+ All-Inclusive Activities",
+      desc: "No hidden charges per game. One pass unlocks horse & camel rides, boating, toy train, sumo, pool, climbing, and all shows. (ATV, Zipline, Paintball separate)."
     },
     {
       title: "Luxury Room Stay Options",
@@ -302,7 +312,7 @@ export const RESORT_DATA = {
   faqs: [
     {
       q: "What is included in the ₹1999 + GST Day Safari pass?",
-      a: "The ₹1999 pass is an all-inclusive ticket that covers: pick up & drop facility from Jaipur, unlimited access to all 12 adventure and fun activities (including over-water zip line, boating, pool, rock climbing, toy train, etc.), the evening Rajasthani Live Cultural Show, and the grand Royal Gala Dinner buffet."
+      a: "The ₹1999 pass is an all-inclusive ticket that covers: pickup (3:00 PM) & drop (10:30 PM - 12:00 AM) from Jaipur, traditional welcome with drinks & starters, access to ~20 fun activities (horse riding, camel riding, bullock cart, boating, toy train, sumo wrestling, pool, etc.), the evening Live Rajasthani Cultural Show with Fire Stunts (7:00 PM - 9:30 PM), and the royal dinner buffet (9:30 PM - 10:30 PM). Note: ATV Ride, Zipline, and Paintball are not included in the package."
     },
     {
       q: "Is stag entry (only boys group) allowed?",
@@ -314,7 +324,7 @@ export const RESORT_DATA = {
     },
     {
       q: "What are the timings for the Day Safari?",
-      a: "The Day Safari runs from 3:30 PM until 10:30 PM, giving you the best daytime adventure weather, scenic sunset boating, night cultural show, and royal gala dinner."
+      a: "The tour starts at 3:00 PM with pickup and concludes with drop-off by 12:00 AM midnight. Resort activities and welcome start from 5:00 PM until 10:30 PM."
     },
     {
       q: "Are the room stays inclusive of the Day Safari package?",

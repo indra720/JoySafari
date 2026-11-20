@@ -14,24 +14,51 @@ export default function BookingModal({ isOpen, onClose, preselectedPackage = "Da
     notes: ''
   });
 
+  const [errorMsg, setErrorMsg] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   if (!isOpen) return null;
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'phone') {
+      const clean = value.replace(/\D/g, '').slice(0, 10);
+      setFormData(prev => ({ ...prev, phone: clean }));
+      if (clean.length === 10) setErrorMsg('');
+      return;
+    }
+    if (name === 'email') {
+      setFormData(prev => ({ ...prev, email: value }));
+      if (!value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+        setErrorMsg('');
+      }
+      return;
+    }
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
   };
 
   const handleWhatsAppBooking = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) {
-      alert("Please enter at least your Name and Mobile Number.");
+    if (!formData.name.trim()) {
+      setErrorMsg("Please enter your Full Name.");
       return;
     }
 
+    const cleanPhone = formData.phone.replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      setErrorMsg("Mobile number must be exactly 10 digits (e.g. 9876543210).");
+      return;
+    }
+
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      setErrorMsg("Please enter a valid email address.");
+      return;
+    }
+
+    setErrorMsg('');
     const message = `*Royal Booking Request - Joy Safari Jaipur*%0A%0A` +
       `*Name:* ${encodeURIComponent(formData.name)}%0A` +
       `*Phone:* ${encodeURIComponent(formData.phone)}%0A` +
@@ -161,16 +188,24 @@ export default function BookingModal({ isOpen, onClose, preselectedPackage = "Da
                   />
                 </div>
                 <div>
-                  <label className="block text-cream/90 font-medium mb-1 flex items-center gap-1">
-                    <Phone className="w-3.5 h-3.5 text-gold" /> WhatsApp / Phone *
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-cream/90 font-medium flex items-center gap-1">
+                      <Phone className="w-3.5 h-3.5 text-gold" /> WhatsApp / Phone *
+                    </label>
+                    <span className={`text-[10px] font-mono ${formData.phone.length === 10 ? 'text-emerald-400 font-bold' : 'text-cream/60'}`}>
+                      {formData.phone.length}/10 digits
+                    </span>
+                  </div>
                   <input
                     type="tel"
                     name="phone"
                     required
+                    maxLength={10}
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="e.g. 98290XXXXX"
+                    placeholder="10-digit number (e.g. 9876543210)"
                     className="w-full bg-royalDark/80 border border-gold/40 rounded-xl px-3 py-2.5 text-cream focus:outline-none focus:border-gold"
                   />
                 </div>
@@ -262,6 +297,12 @@ export default function BookingModal({ isOpen, onClose, preselectedPackage = "Da
                   <strong>Entry Policy:</strong> Entry is strictly reserved for Families and Couples. Bachelor / Stag groups are not accommodated.
                 </span>
               </div>
+
+              {errorMsg && (
+                <div className="p-2.5 rounded-xl bg-red-950/80 border border-red-500/80 text-xs text-red-200">
+                  {errorMsg}
+                </div>
+              )}
 
               {/* Submit Buttons */}
               <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">

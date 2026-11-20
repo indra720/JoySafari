@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Bus, Utensils, Flame, HeartHandshake, Ticket, CalendarCheck, BusFront,
-  Sparkles, Clock, ShieldCheck, ArrowRight, Phone, Calendar, MapPin,
+  Clock, ShieldCheck, ArrowRight, Phone, Calendar, MapPin,
   Star, Award, Users, Coffee, Check, Share2, Heart, Compass, ChevronRight, Trees,
   Music, Crown
 } from 'lucide-react';
@@ -17,16 +17,22 @@ import MobileCarousel from '../components/MobileCarousel';
 
 export default function HomePage() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterError, setNewsletterError] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
   const handleNewsletter = (e) => {
     e.preventDefault();
-    if (newsletterEmail) {
-      setSubscribed(true);
-      setTimeout(() => {
-        setNewsletterEmail('');
-      }, 3000);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newsletterEmail.trim())) {
+      setNewsletterError('Please enter a valid email address.');
+      return;
     }
+    setNewsletterError('');
+    setSubscribed(true);
+    setTimeout(() => {
+      setNewsletterEmail('');
+      setSubscribed(false);
+    }, 3500);
   };
 
   const getFeatureIcon = (iconName) => {
@@ -35,7 +41,8 @@ export default function HomePage() {
       case 'Utensils': return <Utensils className="w-6 h-6 text-[#7A0F1B]" />;
       case 'Flame': return <Flame className="w-6 h-6 text-[#7A0F1B]" />;
       case 'HeartHandshake': return <HeartHandshake className="w-6 h-6 text-[#7A0F1B]" />;
-      default: return <Sparkles className="w-6 h-6 text-[#7A0F1B]" />;
+      case 'Crown': return <Crown className="w-6 h-6 text-[#7A0F1B]" />;
+      default: return <Crown className="w-6 h-6 text-[#7A0F1B]" />;
     }
   };
 
@@ -44,7 +51,8 @@ export default function HomePage() {
       case 'Ticket': return <Ticket className="w-6 h-6 text-gold" />;
       case 'CalendarCheck': return <CalendarCheck className="w-6 h-6 text-gold" />;
       case 'BusFront': return <BusFront className="w-6 h-6 text-gold" />;
-      case 'Sparkles': return <Sparkles className="w-6 h-6 text-gold" />;
+      case 'Crown': return <Crown className="w-6 h-6 text-gold" />;
+      case 'Flame': return <Flame className="w-6 h-6 text-gold" />;
       default: return <Compass className="w-6 h-6 text-gold" />;
     }
   };
@@ -77,7 +85,7 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-5 text-left">
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gold text-[#4A0910] shadow-gold-sm border border-gold-bright">
-                  <Sparkles className="w-3.5 h-3.5 text-[#4A0910]" />
+                  <Crown className="w-3.5 h-3.5 text-[#4A0910]" />
                   <span>{content.hero.ribbonBadge}</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-black/45 backdrop-blur-md text-cream-100 border border-gold/30">
@@ -237,22 +245,22 @@ export default function HomePage() {
             <SectionTitle
               align="left"
               eyebrow="TOP ATTRACTIONS"
-              title="Experience 12+ World-Class"
+              title="Experience 20+ Fun-Filled"
               scriptWord="Adventures"
-              subtitle="From flying high across the shimmering lake to laughing on the toy train, every attraction is crafted for pure family joy and safety."
+              subtitle="From gentle horse & camel rides and peaceful lake boating to joyful toy train and sumo wrestling, every experience is crafted for pure family joy."
             />
             <div className="hidden md:block mb-10">
               <Link
                 to="/activities"
                 className="inline-flex items-center gap-1.5 text-sm font-serif font-bold text-[#7A0F1B] hover:text-[#B8901F] transition-colors"
               >
-                <span>View All 12 Activities</span>
+                <span>View All 20+ Activities</span>
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
 
-          <ActivitySlider activities={content.activities} />
+          <ActivitySlider activities={content.activities.filter(a => a.included !== false)} />
         </div>
       </section>
 
@@ -450,8 +458,8 @@ export default function HomePage() {
 
               <div className="absolute bottom-5 left-5 right-5 z-10">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold text-[#4A0910] text-[11px] font-black uppercase tracking-wider mb-2">
-                  <Sparkles className="w-3 h-3" />
-                  <span>7:30 PM - 9:00 PM Daily</span>
+                  <Flame className="w-3 h-3" />
+                  <span>7:00 PM - 9:30 PM Daily</span>
                 </span>
                 <h4 className="font-serif font-bold text-xl text-white">
                   Folk Dance, Dhol & Fire Show
@@ -463,11 +471,11 @@ export default function HomePage() {
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               {content.liveStage.highlights.map((hl, i) => {
                 const stageMeta = [
-                  { icon: <Sparkles className="w-5 h-5 text-gold" />, pill: 'Open-Air Amphitheater' },
+                  { icon: <Compass className="w-5 h-5 text-gold" />, pill: 'Open-Air Amphitheater' },
                   { icon: <Music className="w-5 h-5 text-gold" />, pill: 'Live Manganiyar Artists' },
                   { icon: <Flame className="w-5 h-5 text-gold" />, pill: 'Evening Stunt Showcase' },
                   { icon: <Crown className="w-5 h-5 text-gold" />, pill: 'Kids & Family Favorite' },
-                ][i] || { icon: <Sparkles className="w-5 h-5 text-gold" />, pill: 'Royal Evening Show' };
+                ][i] || { icon: <Crown className="w-5 h-5 text-gold" />, pill: 'Royal Evening Show' };
 
                 return (
                   <div
@@ -513,24 +521,29 @@ export default function HomePage() {
             <div className="flex items-center gap-2 mb-6 sm:mb-8">
               <Clock className="w-5 h-5 text-gold" />
               <h3 className="font-serif font-bold text-lg sm:text-xl text-white">
-                Evening Event Schedule (3:30 PM to 11:00 PM)
+                Complete Tour Itinerary & Schedule (3:00 PM to 12:00 AM)
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 relative">
               {content.liveStage.timeline.map((item, idx) => (
-                <div key={idx} className="relative group">
-                  <div className="inline-block px-3 py-1 rounded-full text-xs font-serif font-bold bg-gold/20 text-gold border border-gold/40 mb-2">
+                <div key={idx} className="relative group p-3 rounded-2xl bg-white/5 border border-gold/20 hover:border-gold/60 transition-colors">
+                  <div className="inline-block px-2.5 py-1 rounded-full text-[11px] font-serif font-bold bg-gold/20 text-gold border border-gold/40 mb-2">
                     {item.time}
                   </div>
-                  <h4 className="font-serif font-bold text-base text-white group-hover:text-gold-soft transition-colors mb-1">
+                  <h4 className="font-serif font-bold text-sm text-white group-hover:text-gold-soft transition-colors mb-1">
                     {item.label}
                   </h4>
-                  <p className="text-xs text-cream-200 leading-relaxed font-light">
+                  <p className="text-xs text-cream-200/90 leading-relaxed font-light">
                     {item.desc}
                   </p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-gold/25 flex items-center justify-between flex-wrap gap-2 text-xs text-gold-soft/90 font-medium">
+              <span>*Note: ATV Ride, Zipline, and Paintball are not included in the ₹1999 package.</span>
+              <span className="text-cream-200/75">Achrol Valley, Jaipur • Daily Schedule</span>
             </div>
           </div>
         </div>
@@ -645,7 +658,7 @@ export default function HomePage() {
                 </div>
 
                 <p className="text-xs text-[#FFF8E7] leading-relaxed mb-6 font-light">
-                  Covers transport, full 12+ activity passes, boat ride, pool, evening tea, cultural stage show & gala buffet.
+                  Covers AC transport, 20+ fun activities, lake boating, pool, traditional welcome with starters, live folk fire show & royal dinner buffet.
                 </p>
 
                 <Link
@@ -660,35 +673,43 @@ export default function HomePage() {
 
             {/* Right: Cream Family Card */}
             <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-10 border-2 border-cream-200 shadow-soft flex flex-col justify-between">
-              <div className="border-b border-cream-200 pb-4 mb-6">
-                <span className="text-xs font-black px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1.5 mb-2">
-                  <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
-                  <span>{content.pricingSection.familyCard.title}</span>
-                </span>
-                <p className="text-xs text-[#5C4A42] leading-relaxed font-medium">
-                  {content.pricingSection.familyCard.subtitle}
-                </p>
-              </div>
+              <div>
+                <div className="border-b border-cream-200 pb-4 mb-6">
+                  <span className="text-xs font-black px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 inline-flex items-center gap-1.5 mb-2">
+                    <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
+                    <span>{content.pricingSection.familyCard.title}</span>
+                  </span>
+                  <p className="text-xs text-[#5C4A42] leading-relaxed font-medium">
+                    {content.pricingSection.familyCard.subtitle}
+                  </p>
+                </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {content.pricingSection.familyCard.inclusions.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 p-3.5 rounded-2xl bg-cream-50 border-2 border-cream-200">
-                    <div className="w-10 h-10 rounded-xl bg-[#7A0F1B] text-gold flex items-center justify-center flex-shrink-0 shadow-sm">
-                      {item.icon === 'Bus' && <Bus className="w-5 h-5 text-gold" />}
-                      {item.icon === 'Utensils' && <Utensils className="w-5 h-5 text-gold" />}
-                      {item.icon === 'Flame' && <Flame className="w-5 h-5 text-gold" />}
-                      {item.icon === 'Users' && <Users className="w-5 h-5 text-gold" />}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {content.pricingSection.familyCard.inclusions.map((item, i) => (
+                    <div key={i} className="flex items-start gap-3 p-3.5 rounded-2xl bg-cream-50 border-2 border-cream-200">
+                      <div className="w-10 h-10 rounded-xl bg-[#7A0F1B] text-gold flex items-center justify-center flex-shrink-0 shadow-sm">
+                        {item.icon === 'Bus' && <Bus className="w-5 h-5 text-gold" />}
+                        {item.icon === 'Utensils' && <Utensils className="w-5 h-5 text-gold" />}
+                        {item.icon === 'Flame' && <Flame className="w-5 h-5 text-gold" />}
+                        {item.icon === 'Crown' && <Crown className="w-5 h-5 text-gold" />}
+                        {item.icon === 'Users' && <Users className="w-5 h-5 text-gold" />}
+                      </div>
+                      <div>
+                        <h4 className="font-serif font-black text-sm text-[#2B1511]">
+                          {item.label}
+                        </h4>
+                        <p className="text-xs text-[#5C4A42] leading-tight mt-0.5 font-medium">
+                          {item.desc}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-serif font-black text-sm text-[#2B1511]">
-                        {item.label}
-                      </h4>
-                      <p className="text-xs text-[#5C4A42] leading-tight mt-0.5 font-medium">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+
+                <div className="mt-4 px-3.5 py-2.5 rounded-2xl bg-amber-50/90 border border-amber-300/80 text-xs text-[#7A0F1B] font-semibold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#7A0F1B] shrink-0" />
+                  <span>Note: ATV Ride, Zipline, and Paintball are not included in the package.</span>
+                </div>
               </div>
 
               <div className="mt-6 pt-4 border-t border-cream-200 flex items-center justify-between text-xs text-[#5C4A42] font-medium">
@@ -914,7 +935,8 @@ export default function HomePage() {
                   <div className="w-16 h-16 rounded-full bg-[#7A0F1B] text-gold border-4 border-white shadow-md flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     {item.icon === 'ShieldCheck' && <ShieldCheck className="w-7 h-7" />}
                     {item.icon === 'Bus' && <Bus className="w-7 h-7" />}
-                    {item.icon === 'Sparkles' && <Sparkles className="w-7 h-7" />}
+                    {item.icon === 'Ticket' && <Ticket className="w-7 h-7" />}
+                    {item.icon === 'Crown' && <Crown className="w-7 h-7" />}
                     {item.icon === 'UtensilsCrossed' && <Utensils className="w-7 h-7" />}
                     {item.icon === 'Trees' && <Trees className="w-7 h-7" />}
                     {item.icon === 'Award' && <Award className="w-7 h-7" />}
@@ -1142,7 +1164,10 @@ export default function HomePage() {
               <input
                 type="email"
                 value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
+                onChange={(e) => {
+                  setNewsletterEmail(e.target.value);
+                  if (newsletterError) setNewsletterError('');
+                }}
                 placeholder={content.newsletter.placeholder}
                 required
                 className="flex-1 px-4 py-3.5 rounded-full bg-white/10 border-2 border-gold/40 text-white placeholder:text-cream-200/60 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-gold backdrop-blur-sm"
@@ -1154,6 +1179,11 @@ export default function HomePage() {
                 {subscribed ? 'Subscribed!' : content.newsletter.buttonText}
               </button>
             </form>
+            {newsletterError && (
+              <p className="text-xs text-rose-300 font-medium">
+                {newsletterError}
+              </p>
+            )}
             <p className="text-[11px] text-cream-200">
               {content.newsletter.privacyNote}
             </p>

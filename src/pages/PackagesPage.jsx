@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Check, X, Sparkles, ChevronDown, ChevronUp, Calendar, Heart,
-  Bus, ShieldCheck, ArrowRight, Crown, Compass
+  Check, X, Crown, ChevronDown, ChevronUp, Calendar, Heart,
+  Bus, ShieldCheck, ArrowRight, Compass
 } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
@@ -17,14 +17,14 @@ export default function PackagesPage() {
     { feature: "Applicability", day: "Per Person", garden: "2 Adults (1 Room)", lake: "2 Adults (1 Suite)" },
     { feature: "Overnight Room Stay", day: false, garden: "Garden Cottage", lake: "Lake View Balcony" },
     { feature: "Breakfast Buffet Included", day: false, garden: true, lake: true },
-    { feature: "Free AC Pick Up & Drop", day: true, garden: true, lake: true },
-    { feature: "All 12+ Adventure Activities", day: true, garden: true, lake: true },
+    { feature: "Free AC Pick Up & Drop (3 PM - 12 AM)", day: true, garden: true, lake: true },
+    { feature: "Traditional Welcome & Starters (5 PM)", day: true, garden: true, lake: true },
+    { feature: "All 20+ Fun-Filled Activities", day: true, garden: true, lake: true },
     { feature: "Lake Boating with Life Vests", day: true, garden: true, lake: true },
-    { feature: "Swimming Pool Access", day: true, garden: true, lake: true },
-    { feature: "Sunset High Tea & Snacks", day: true, garden: true, lake: true },
-    { feature: "Live Rajasthani Cultural Show", day: true, garden: true, lake: true },
-    { feature: "Royal Gala Dinner Buffet", day: true, garden: true, lake: true },
-    { feature: "Priority Ride Queues", day: false, garden: false, lake: true },
+    { feature: "Resort Swimming Pool & Kids' Zone", day: true, garden: true, lake: true },
+    { feature: "Live Rajasthani Folk & Fire Show", day: true, garden: true, lake: true },
+    { feature: "Royal Dinner Buffet (Rajasthani + Regular)", day: true, garden: true, lake: true },
+    { feature: "ATV, Zipline & Paintball", day: "Optional Add-On", garden: "Optional Add-On", lake: "Optional Add-On" },
   ];
 
   return (
@@ -120,7 +120,7 @@ export default function PackagesPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#240306]/90 via-black/20 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 text-white">
                 <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-gold-soft">
-                  <Sparkles className="w-3 h-3" />
+                  <Crown className="w-3 h-3" />
                   <span>03 • Overnight Luxury</span>
                 </span>
                 <h3 className="font-serif font-bold text-xl mt-0.5">
@@ -177,7 +177,7 @@ export default function PackagesPage() {
 
                     {pkg.popular && (
                       <span className="inline-flex items-center gap-1 bg-black/55 backdrop-blur-md text-gold-soft border border-gold/40 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full">
-                        <Sparkles className="w-3 h-3 text-gold" />
+                        <Crown className="w-3 h-3 text-gold" />
                         <span>{pkg.badge || 'Most Popular'}</span>
                       </span>
                     )}
@@ -244,6 +244,41 @@ export default function PackagesPage() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Official Tour Itinerary */}
+      <div className="fluid-container mb-20">
+        <div className="w-full max-w-[1720px] mx-auto bg-gradient-to-br from-[#36060B] via-[#4A0910] to-[#240306] rounded-3xl p-6 sm:p-10 border-2 border-gold/40 shadow-xl text-white">
+          <SectionTitle
+            theme="dark"
+            eyebrow="OFFICIAL SCHEDULE"
+            title="Complete Tour"
+            scriptWord="Itinerary"
+            subtitle="From 3:00 PM pickup to 12:00 AM midnight drop-off across Jaipur, here is your seamless royal day plan."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 mt-8">
+            {content.tourItinerary.map((step, idx) => (
+              <div key={idx} className="p-4 rounded-2xl bg-black/40 border border-gold/25 hover:border-gold transition-colors flex flex-col justify-between">
+                <div>
+                  <span className="inline-block px-2.5 py-1 rounded-full text-[11px] font-bold bg-gold/20 text-gold-soft border border-gold/40 mb-2">
+                    {step.time}
+                  </span>
+                  <h4 className="font-serif font-bold text-sm text-white mb-1.5">
+                    {step.title}
+                  </h4>
+                  <p className="text-xs text-cream-200/90 leading-relaxed font-light">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 pt-4 border-t border-gold/20 text-center text-xs text-gold-soft/90 font-medium">
+            *Note: ATV Ride, Zipline, and Paintball are specialized thrill add-ons and are not included in the standard ₹1999 package.
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
+import { Coffee, Check, ArrowRight, Calendar, Play } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
 import VideoSurface from '../components/VideoSurface';
@@ -106,7 +106,7 @@ export default function RoomsPage() {
                           : 'bg-cream-50 text-[#2B1511] border-cream-200 hover:border-gold'
                       }`}
                     >
-                      <Sparkles className="w-3.5 h-3.5" />
+                      <Play className="w-3.5 h-3.5 fill-current" />
                       <span>Live View</span>
                     </button>
 

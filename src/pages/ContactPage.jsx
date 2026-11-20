@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Phone, Mail, MapPin, Globe, MessageCircle, Calendar, Users, 
-  Bus, CheckCircle2, Send, Sparkles, Clock, ShieldCheck, Heart, Check
+  Bus, CheckCircle2, Send, Clock, ShieldCheck, Heart, Check, AlertCircle
 } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
@@ -28,6 +28,7 @@ export default function ContactPage() {
     message: ''
   });
 
+  const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [bookingRef, setBookingRef] = useState('');
 
@@ -51,6 +52,22 @@ export default function ContactPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'mobile') {
+      // Only keep digits and cap strictly at 10
+      const cleaned = value.replace(/\D/g, '').slice(0, 10);
+      setFormData(prev => ({ ...prev, mobile: cleaned }));
+      if (cleaned.length === 10) {
+        setErrors(prev => ({ ...prev, mobile: '' }));
+      }
+      return;
+    }
+    if (name === 'email') {
+      setFormData(prev => ({ ...prev, email: value }));
+      if (!value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+        setErrors(prev => ({ ...prev, email: '' }));
+      }
+      return;
+    }
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -59,6 +76,25 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newErrors = {};
+
+    // Validate strictly 10-digit mobile
+    const cleanMobile = formData.mobile.replace(/\D/g, '');
+    if (cleanMobile.length !== 10) {
+      newErrors.mobile = 'Mobile number must be exactly 10 digits (e.g. 9876543210)';
+    }
+
+    // Validate email format if provided
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address (e.g. name@example.com)';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
     const ref = 'JS-' + Math.floor(100000 + Math.random() * 900000);
     setBookingRef(ref);
     setSubmitted(true);
@@ -187,18 +223,36 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#2B1511] uppercase tracking-wider mb-1.5">
-                      Mobile / WhatsApp Number *
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-xs font-bold text-[#2B1511] uppercase tracking-wider">
+                        Mobile / WhatsApp Number *
+                      </label>
+                      <span className={`text-[10px] font-mono font-bold ${
+                        formData.mobile.length === 10 ? 'text-emerald-700' : 'text-gray-400'
+                      }`}>
+                        {formData.mobile.length}/10 digits
+                      </span>
+                    </div>
                     <input
                       type="tel"
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleChange}
                       required
-                      placeholder="e.g. 9876543210"
-                      className="w-full px-4 py-2.5 rounded-xl bg-cream-50 border-2 border-cream-300 focus:border-gold focus:ring-1 focus:ring-gold text-xs sm:text-sm font-semibold text-[#2B1511] outline-none transition-all placeholder:text-gray-400"
+                      maxLength={10}
+                      inputMode="numeric"
+                      pattern="[0-9]{10}"
+                      placeholder="10-digit mobile number (e.g. 9876543210)"
+                      className={`w-full px-4 py-2.5 rounded-xl bg-cream-50 border-2 ${
+                        errors.mobile ? 'border-red-500 focus:border-red-600' : 'border-cream-300 focus:border-gold'
+                      } focus:ring-1 focus:ring-gold text-xs sm:text-sm font-semibold text-[#2B1511] outline-none transition-all placeholder:text-gray-400`}
                     />
+                    {errors.mobile && (
+                      <p className="text-[11px] text-red-600 font-semibold mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3 shrink-0" />
+                        <span>{errors.mobile}</span>
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -214,8 +268,16 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="e.g. contact@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-cream-50 border-2 border-cream-300 focus:border-gold focus:ring-1 focus:ring-gold text-xs sm:text-sm font-semibold text-[#2B1511] outline-none transition-all placeholder:text-gray-400"
+                      className={`w-full px-4 py-2.5 rounded-xl bg-cream-50 border-2 ${
+                        errors.email ? 'border-red-500 focus:border-red-600' : 'border-cream-300 focus:border-gold'
+                      } focus:ring-1 focus:ring-gold text-xs sm:text-sm font-semibold text-[#2B1511] outline-none transition-all placeholder:text-gray-400`}
                     />
+                    {errors.email && (
+                      <p className="text-[11px] text-red-600 font-semibold mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3 shrink-0" />
+                        <span>{errors.email}</span>
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -375,7 +437,7 @@ export default function ContactPage() {
                   Your Royal Escape Awaits
                 </h3>
                 <p className="text-xs text-cream-200">
-                  Daily 3:30 PM to 11:00 PM • Achrol Valley, NH-48
+                  Daily 3:00 PM to 12:00 AM (Pickup to Drop-off) • Achrol Valley, NH-48
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Users, MapPin, Sparkles, ChevronDown, Check, ArrowRight } from 'lucide-react';
+import { Calendar, Users, MapPin, Ticket, ChevronDown, Check, ArrowRight } from 'lucide-react';
 import { content } from '../data/content';
 
 export default function BookingWidget({ className = '' }) {
@@ -37,7 +37,7 @@ export default function BookingWidget({ className = '' }) {
       <div className="flex flex-col xs:flex-row xs:items-center justify-between pb-3.5 mb-4 border-b border-cream-200 gap-2">
         <div className="flex items-center gap-2">
           <span className="p-1.5 rounded-full bg-gold/20 text-[#7A0F1B] shrink-0">
-            <Sparkles className="w-4 h-4 text-[#B8901F]" />
+            <Ticket className="w-4 h-4 text-[#B8901F]" />
           </span>
           <span className="text-xs font-black uppercase tracking-wider text-[#7A0F1B] font-sans">
             Instant Reservation

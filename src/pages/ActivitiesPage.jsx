@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, ShieldCheck, Users, Heart, ArrowRight, X, Calendar, Sparkles } from 'lucide-react';
+import { Clock, ShieldCheck, Users, Heart, ArrowRight, X, Calendar, Check } from 'lucide-react';
 import { content } from '../data/content';
 import SectionTitle from '../components/SectionTitle';
 import VideoSurface from '../components/VideoSurface';
@@ -50,10 +50,10 @@ export default function ActivitiesPage() {
         <div className="fluid-container relative z-10 text-center">
           <SectionTitle
             theme="dark"
-            eyebrow="12+ WORLD-CLASS ADVENTURES"
-            title="All 12 Attractions Included in"
+            eyebrow="20+ FUN-FILLED EXPERIENCES"
+            title="20+ Attractions Included in"
             scriptWord="One Royal Pass"
-            subtitle="From high-flying zip lines over tranquil waters to authentic Rajasthani folk dances and serene boating, there is something thrilling for every family member."
+            subtitle="From gentle horse & camel rides to serene lake boating, toy train, sumo wrestling and thrilling night fire shows. (Note: ATV Ride, Zipline, and Paintball are available as optional thrill add-ons)."
           />
 
           {/* Category Filter Chips */}
@@ -107,11 +107,13 @@ export default function ActivitiesPage() {
                     <div className="absolute top-3 left-3">
                       <span
                         className={`inline-flex items-center gap-1 text-[10px] font-black tracking-wide uppercase px-2.5 py-1 rounded-full shadow-md ${
-                          tagStyles[act.tag] || 'bg-maroon text-white'
+                          act.included === false
+                            ? 'bg-amber-700 text-white'
+                            : (tagStyles[act.tag] || 'bg-maroon text-white')
                         }`}
                       >
-                        <Sparkles className="w-2.5 h-2.5" />
-                        <span>{act.tag}</span>
+                        <Check className="w-2.5 h-2.5" />
+                        <span>{act.included === false ? 'Add-on' : act.tag}</span>
                       </span>
                     </div>
 
@@ -133,8 +135,12 @@ export default function ActivitiesPage() {
                         <Clock className="w-3 h-3 text-gold-soft" />
                         <span>{act.timing}</span>
                       </span>
-                      <span className="bg-black/60 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-gold-soft font-bold border border-gold/30">
-                        Included
+                      <span className={`px-2.5 py-0.5 rounded-full font-bold border backdrop-blur-sm ${
+                        act.included === false
+                          ? 'bg-amber-950/80 text-amber-300 border-amber-400/50'
+                          : 'bg-black/60 text-gold-soft border-gold/30'
+                      }`}>
+                        {act.included === false ? 'Add-On' : 'Included'}
                       </span>
                     </div>
                   </div>
@@ -181,7 +187,7 @@ export default function ActivitiesPage() {
             <VideoSurface
               src={content.liveStage.bgVideo}
               poster={content.liveStage.bgImage}
-              alt="All 12 Activities Included"
+              alt="20+ Activities Included"
               shouldPlay={true}
               muted={true}
             />
@@ -193,10 +199,10 @@ export default function ActivitiesPage() {
               100% UNLIMITED ACCESS
             </span>
             <h3 className="font-serif font-bold text-2xl sm:text-3xl text-white">
-              Enjoy all 12 activities with your Day Safari Pass
+              Enjoy 20+ fun-filled activities with your Day Safari Pass
             </h3>
             <p className="text-xs sm:text-sm text-[#FFF8E7]/85 max-w-xl">
-              No individual ride tokens needed. Your ₹1999 ticket covers every single activity, free pick-up, evening high tea, and the gala dinner buffet.
+              No individual ride tokens needed. Your ₹1999 ticket covers 20+ activities, free pickup & drop across Jaipur, traditional welcome with starters, live folk fire show, and royal dinner buffet. (Note: ATV Ride, Zipline, and Paintball are not included in the package).
             </p>
           </div>
 

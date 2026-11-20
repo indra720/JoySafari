@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ArrowRight, Play } from 'lucide-react';
 import { content } from '../data/content';
 import VideoSurface from '../components/VideoSurface';
 import MobileCarousel from '../components/MobileCarousel';
@@ -476,7 +476,7 @@ export default function GalleryPage() {
 
                 <div className="absolute top-3.5 left-3.5">
                   <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-gold text-[#4A0910] shadow-sm">
-                    <Sparkles className="w-2.5 h-2.5" />
+                    <Play className="w-2.5 h-2.5 fill-current" />
                     <span>{item.category}</span>
                   </span>
                 </div>
