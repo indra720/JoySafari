@@ -48,22 +48,22 @@ export default function BookingWidget({ className = '' }) {
         </span>
       </div>
 
-      {/* Tabs: Single line per tab on mobile (flex-col), 2-col grid on sm+ as requested */}
-      <div className="flex flex-col sm:grid sm:grid-cols-2 p-1.5 bg-cream-200/70 rounded-2xl mb-5 gap-2 sm:gap-1.5">
+      {/* Tabs: Clean single line per tab on both mobile & desktop */}
+      <div className="grid grid-cols-2 p-1.5 bg-cream-200/70 rounded-2xl mb-5 gap-1.5 sm:gap-2">
         <button
           type="button"
           onClick={() => {
             setActiveTab('day-safari');
             setPackageType('day-safari');
           }}
-          className={`py-2.5 px-3.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 flex items-center justify-between sm:justify-center gap-2 cursor-pointer w-full ${
+          className={`py-2 px-2.5 sm:px-3 text-xs sm:text-[13px] font-bold rounded-xl transition-all duration-200 flex items-center justify-between gap-1 cursor-pointer w-full whitespace-nowrap overflow-hidden ${
             activeTab === 'day-safari'
               ? 'bg-[#7A0F1B] text-white shadow-md'
               : 'text-[#2B1511] hover:text-[#7A0F1B] bg-white/80'
           }`}
         >
-          <span>Day Safari Experience</span>
-          <span className={`text-[10px] px-2 py-0.5 rounded-full font-black ${
+          <span className="font-sans font-bold truncate">Day Safari</span>
+          <span className={`text-[10px] sm:text-[11px] px-2 py-0.5 rounded-full font-black whitespace-nowrap shrink-0 ${
             activeTab === 'day-safari' ? 'bg-gold text-[#4A0910]' : 'bg-[#7A0F1B] text-white'
           }`}>
             ₹1999 + GST
@@ -76,14 +76,14 @@ export default function BookingWidget({ className = '' }) {
             setActiveTab('stay');
             setPackageType('lake-stay');
           }}
-          className={`py-2.5 px-3.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 flex items-center justify-between sm:justify-center gap-2 cursor-pointer w-full ${
+          className={`py-2 px-2.5 sm:px-3 text-xs sm:text-[13px] font-bold rounded-xl transition-all duration-200 flex items-center justify-between gap-1 cursor-pointer w-full whitespace-nowrap overflow-hidden ${
             activeTab === 'stay'
               ? 'bg-[#7A0F1B] text-white shadow-md'
               : 'text-[#2B1511] hover:text-[#7A0F1B] bg-white/80'
           }`}
         >
-          <span>Safari + Room Stay</span>
-          <span className={`text-[10px] px-2 py-0.5 rounded-full font-black ${
+          <span className="font-sans font-bold truncate">Safari + Stay</span>
+          <span className={`text-[10px] sm:text-[11px] px-2 py-0.5 rounded-full font-black whitespace-nowrap shrink-0 ${
             activeTab === 'stay' ? 'bg-gold text-[#4A0910]' : 'bg-gold/30 text-[#4A0910]'
           }`}>
             From ₹6999

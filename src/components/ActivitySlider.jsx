@@ -77,13 +77,13 @@ export default function ActivitySlider({ activities = [] }) {
     touchStartXRef.current = null;
   };
 
-  // Responsive horizontal step offsets so the 5-card staircase spans wide right up to the arrows
+  // Responsive horizontal step offsets calibrated to keep all 5 cards visible without overlapping side arrows
   const getOffsets = () => {
-    if (viewportWidth >= 1536) return { step1: 325, step2: 590, showOuter: true };
-    if (viewportWidth >= 1280) return { step1: 285, step2: 520, showOuter: true };
-    if (viewportWidth >= 1024) return { step1: 235, step2: 425, showOuter: true };
-    if (viewportWidth >= 640) return { step1: 195, step2: 330, showOuter: false };
-    return { step1: 125, step2: 210, showOuter: false };
+    if (viewportWidth >= 1536) return { step1: 255, step2: 480, showOuter: true };
+    if (viewportWidth >= 1200) return { step1: 225, step2: 420, showOuter: true };
+    if (viewportWidth >= 1024) return { step1: 210, step2: 380, showOuter: false };
+    if (viewportWidth >= 640) return { step1: 175, step2: 300, showOuter: false };
+    return { step1: 130, step2: 220, showOuter: false };
   };
 
   const { step1, step2, showOuter } = getOffsets();
@@ -101,24 +101,24 @@ export default function ActivitySlider({ activities = [] }) {
     if (offset === -1 || offset === 1) {
       return {
         x: offset * step1,
-        scale: 0.9,
+        scale: 0.88,
         zIndex: 20,
-        opacity: 0.96,
+        opacity: 0.95,
         filter: 'brightness(0.92)',
       };
     }
     if (offset === -2 || offset === 2) {
       return {
         x: offset > 0 ? step2 : -step2,
-        scale: 0.79,
+        scale: 0.76,
         zIndex: 10,
-        opacity: showOuter ? 0.88 : 0,
-        filter: 'brightness(0.84)',
+        opacity: showOuter ? 0.85 : 0,
+        filter: 'brightness(0.82)',
       };
     }
     return {
-      x: offset > 0 ? step2 + 120 : -(step2 + 120),
-      scale: 0.68,
+      x: offset > 0 ? step2 + 100 : -(step2 + 100),
+      scale: 0.65,
       zIndex: 1,
       opacity: 0,
       filter: 'brightness(0.7)',
@@ -143,7 +143,7 @@ export default function ActivitySlider({ activities = [] }) {
         type="button"
         onClick={goPrev}
         aria-label="Previous attraction"
-        className="carousel-control hidden md:flex absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white hover:bg-[#7A0F1B] text-[#4A0910] hover:text-gold border-2 border-gold/50 shadow-lg items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer"
+        className="carousel-control hidden md:flex absolute left-2 lg:left-4 xl:left-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white hover:bg-[#7A0F1B] text-[#4A0910] hover:text-gold border-2 border-gold/50 shadow-lg items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
@@ -152,13 +152,13 @@ export default function ActivitySlider({ activities = [] }) {
         type="button"
         onClick={goNext}
         aria-label="Next attraction"
-        className="carousel-control hidden md:flex absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white hover:bg-[#7A0F1B] text-[#4A0910] hover:text-gold border-2 border-gold/50 shadow-lg items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer"
+        className="carousel-control hidden md:flex absolute right-2 lg:right-4 xl:right-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white hover:bg-[#7A0F1B] text-[#4A0910] hover:text-gold border-2 border-gold/50 shadow-lg items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* 5-Card Layered Coverflow Stage (Wide Full-Screen Fill, Clean Cream Background) */}
-      <div className="relative h-[485px] sm:h-[515px] xl:h-[545px] w-full flex items-center justify-center">
+      {/* 5-Card Layered Coverflow Stage (Calibrated to never overlap side buttons) */}
+      <div className="relative h-[470px] sm:h-[495px] xl:h-[515px] w-full flex items-center justify-center">
         {activities.map((act, idx) => {
           const offset = getSignedOffset(idx);
           const maxOffset = showOuter ? 2 : 1;
@@ -194,14 +194,14 @@ export default function ActivitySlider({ activities = [] }) {
               onClick={() => {
                 if (!isCenter) setActiveIndex(idx);
               }}
-              className={`absolute w-[280px] sm:w-[310px] lg:w-[340px] xl:w-[365px] rounded-[1.85rem] bg-white overflow-hidden flex flex-col select-none transition-shadow duration-300 ${
+              className={`absolute w-[260px] sm:w-[280px] md:w-[290px] lg:w-[305px] xl:w-[320px] rounded-[1.85rem] bg-white overflow-hidden flex flex-col select-none transition-shadow duration-300 ${
                 isCenter
                   ? 'border border-[#D4AF37]/75 shadow-[0_24px_55px_-14px_rgba(74,9,16,0.28)] cursor-default'
                   : 'border border-cream-300/80 shadow-[0_14px_34px_-10px_rgba(43,21,17,0.18)] cursor-pointer'
               }`}
             >
               {/* Top Video Half with Soft Curved Bottom Edge */}
-              <div className="relative h-[195px] sm:h-[215px] xl:h-[235px] w-full bg-[#1D0407] overflow-hidden shrink-0 rounded-b-[1.5rem]">
+              <div className="relative h-[180px] sm:h-[195px] xl:h-[205px] w-full bg-[#1D0407] overflow-hidden shrink-0 rounded-b-[1.5rem]">
                 <VideoSurface
                   src={act.videoUrl}
                   poster={act.image}
